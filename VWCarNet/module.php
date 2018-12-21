@@ -86,6 +86,8 @@ class VWCarNet extends IPSModule
     {
         $this->getStatus();
         $this->getPosition();
+        $this->getClimater();
+        $this->getCharger();
     }
 
     public function TestAccess()
