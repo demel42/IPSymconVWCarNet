@@ -275,8 +275,8 @@ class VWCarNet extends IPSModule
 
         if ($cdata != '') {
             $jdata = json_decode($cdata, true);
-            if (isset($jdata['"error"'])) {
-                $msg = $jdata['description'];
+            if (isset($jdata['error']['description'])) {
+                $msg = $jdata['error']['description'];
             }
         }
 
