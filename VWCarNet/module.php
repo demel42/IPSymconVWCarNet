@@ -97,17 +97,17 @@ class VWCarNet extends IPSModule
             $header = [
                     'Accept: application/json',
                     'X-App-Name: eRemote',
-					'X-App-Version: 1.0.0',
-					'User-Agent: okhttp/2.3.0'
+                    'X-App-Version: 1.0.0',
+                    'User-Agent: okhttp/2.3.0'
                 ];
             $postdata = [
                     'grant_type' => 'password',
-					'username'   => $username,
+                    'username'   => $username,
                     'password'   => $password
                 ];
 
-			$jdata = do_HttpRequest($auth_url, '', $header, $postdata, 'POST');
-			$token = $jdata['access_token'];
+            $jdata = do_HttpRequest($auth_url, '', $header, $postdata, 'POST');
+            $token = $jdata['access_token'];
 
             $cdata = '';
             $msg = '';
@@ -126,7 +126,7 @@ class VWCarNet extends IPSModule
 
             $token = $jdata['access_token'];
             //$expires_in = $jdata['expires_in'];
-			$expires_in = 0;
+            $expires_in = 0;
 
             $jtoken = [
                     'token'      => $token,
@@ -148,14 +148,14 @@ class VWCarNet extends IPSModule
         }
         $token = $jtoken['token'];
 
-        	$header = [
+        $header = [
                     'Accept: application/json',
                     'X-App-Name: eRemote',
-					'X-App-Version: 1.0.0',
-					'User-Agent: okhttp/2.3.0',
-					'Authorization: AudiAuth 1 ' . $token,
+                    'X-App-Version: 1.0.0',
+                    'User-Agent: okhttp/2.3.0',
+                    'Authorization: AudiAuth 1 ' . $token,
                 ];
-			
+
         $msg = '';
         $statuscode = $this->do_HttpRequest($func, $params, $header, '', 'GET', $data, $msg);
         $this->SendDebug(__FUNCTION__, 'statuscode=' . $statuscode . ', data=' . print_r($data, true), 0);
@@ -168,58 +168,58 @@ class VWCarNet extends IPSModule
         return $statuscode ? false : true;
     }
 
-	private function do_HttpRequest($func, $params, $header, $postdata, $mode, &$data, &$msg)
-	{
-			$url = 'https://msg.volkswagen.de/fs-car' . $func;
+    private function do_HttpRequest($func, $params, $header, $postdata, $mode, &$data, &$msg)
+    {
+        $url = 'https://msg.volkswagen.de/fs-car' . $func;
 
-			if ($params != '') {
-				$n = 0;
-				foreach ($params as $param => $value) {
-					$url .= ($n++ ? '&' : '?') . $param . '=' . rawurlencode($value);
-				}
-			}
+        if ($params != '') {
+            $n = 0;
+            foreach ($params as $param => $value) {
+                $url .= ($n++ ? '&' : '?') . $param . '=' . rawurlencode($value);
+            }
+        }
 
-			echo 'http-' . $mode . ': url=' . $url . PHP_EOL;
-			echo '    header=' . print_r($header, true) . PHP_EOL;
-			if ($postdata != '') {
-				$postdata = http_build_query($postdata);
-				echo '    postdata=' . $postdata . PHP_EOL;
-			}
+        echo 'http-' . $mode . ': url=' . $url . PHP_EOL;
+        echo '    header=' . print_r($header, true) . PHP_EOL;
+        if ($postdata != '') {
+            $postdata = http_build_query($postdata);
+            echo '    postdata=' . $postdata . PHP_EOL;
+        }
 
-			$time_start = microtime(true);
+        $time_start = microtime(true);
 
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $url);
-			curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-			switch ($mode) {
-				case 'GET':
-					break;
-				case 'POST':
-					curl_setopt($ch, CURLOPT_POST, true);
-					curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-					break;
-				case 'PUT':
-					curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-					curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $mode);
-					break;
-				case 'DELETE':
-					curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $mode);
-					break;
-			}
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-			$cdata = curl_exec($ch);
-			$httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-			$redirect_url = curl_getinfo($ch, CURLINFO_REDIRECT_URL);
-			curl_close($ch);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        switch ($mode) {
+                case 'GET':
+                    break;
+                case 'POST':
+                    curl_setopt($ch, CURLOPT_POST, true);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+                    break;
+                case 'PUT':
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $mode);
+                    break;
+                case 'DELETE':
+                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $mode);
+                    break;
+            }
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        $cdata = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $redirect_url = curl_getinfo($ch, CURLINFO_REDIRECT_URL);
+        curl_close($ch);
 
-			$duration = round(microtime(true) - $time_start, 2);
+        $duration = round(microtime(true) - $time_start, 2);
 
-			echo ' => httpcode=' . $httpcode . ', duration=' . $duration . 's' . PHP_EOL;
-			echo ' => cdata=' . $cdata . PHP_EOL;
-			$jdata = json_decode($cdata, true);
-			echo ' => jdata=' . print_r($jdata,true) . PHP_EOL;
-			
+        echo ' => httpcode=' . $httpcode . ', duration=' . $duration . 's' . PHP_EOL;
+        echo ' => cdata=' . $cdata . PHP_EOL;
+        $jdata = json_decode($cdata, true);
+        echo ' => jdata=' . print_r($jdata, true) . PHP_EOL;
+
         $statuscode = 0;
         $err = '';
         $msg = '';
@@ -261,5 +261,5 @@ class VWCarNet extends IPSModule
         }
 
         return $statuscode;
-	}
+    }
 }
