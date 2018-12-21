@@ -1,0 +1,11 @@
+{
+	"id": "{D0B19818-B164-403D-B67C-E00C42673C79}",
+	"name": "VWCarNet",
+	"type": 1,
+	"vendor": "Volkswagen",
+	"aliases": [],
+	"parentRequirements": [],
+	"childRequirements": [],
+	"implemented": [],
+	"prefix": "VWCarNet"
+}
