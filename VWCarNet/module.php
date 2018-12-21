@@ -10,36 +10,45 @@ class VWCarNet extends IPSModule
     {
         parent::Create();
 
-        $this->RegisterPropertyString('userid', '');
+        $this->RegisterPropertyString('username', '');
         $this->RegisterPropertyString('password', '');
         $this->RegisterPropertyString('vin', '');
+
+		$this->RegisterPropertyInteger('update_interval', 5);
+
+		$this->RegisterTimer('UpdateData', 0, 'VWCarNet_UpdateData(' . $this->InstanceID . ');');
     }
 
     public function ApplyChanges()
     {
         parent::ApplyChanges();
 
-        $userid = $this->ReadPropertyString('userid');
+        $username = $this->ReadPropertyString('username');
         $password = $this->ReadPropertyString('password');
 
-        if ($userid != '' && $password != '') {
+        if ($username != '' && $password != '') {
             $this->SetStatus(IS_ACTIVE);
         } else {
             $this->SetStatus(IS_INVALIDCONFIG);
         }
+
+		$this->SetUpdateInterval();
     }
 
     public function GetConfigurationForm()
     {
         $formElements = [];
         $formElements[] = ['type' => 'Label', 'label' => 'Volkswagen Car-Net Account'];
-        $formElements[] = ['type' => 'ValidationTextBox', 'name' => 'userid', 'caption' => 'User-ID (email)'];
+        $formElements[] = ['type' => 'ValidationTextBox', 'name' => 'username', 'caption' => 'User-ID (email)'];
         $formElements[] = ['type' => 'ValidationTextBox', 'name' => 'password', 'caption' => 'Password'];
         $formElements[] = ['type' => 'Label', 'label' => ''];
         $formElements[] = ['type' => 'ValidationTextBox', 'name' => 'vin', 'caption' => 'VIN'];
+		$formElements[] = ['type' => 'Label', 'label' => 'Update data every X minutes'];
+		$formElements[] = ['type' => 'IntervalBox', 'name' => 'update_interval', 'caption' => 'Minutes'];
 
         $formActions = [];
         $formActions[] = ['type' => 'Button', 'caption' => 'Test access', 'onClick' => 'VWCarNet_TestAccess($id);'];
+        $formActions[] = ['type' => 'Button', 'caption' => 'Update data', 'onClick' => 'VWCarNet_UpdateData($id);'];
         $formActions[] = ['type' => 'Label', 'label' => '____________________________________________________________________________________________________'];
         $formActions[] = [
                             'type'    => 'Button',
@@ -63,13 +72,31 @@ class VWCarNet extends IPSModule
         return json_encode(['elements' => $formElements, 'actions' => $formActions, 'status' => $formStatus]);
     }
 
+	public function SetUpdateInterval(int $Minutes = null)
+	{
+		if (!($Minutes > 0)) {
+			$Minutes = $this->ReadPropertyInteger('update_interval');
+		}
+		$interval = $Minutes * 60 * 1000;
+		$this->SendDebug(__FUNCTION__, 'minutes=' . $Minutes, 0);
+		$this->SetTimerInterval('UpdateData', $interval);
+	}
+
+	public function UpdateData()
+	{
+		$this->getStatus();
+		$this->getPosition();
+	}
+
     public function TestAccess()
     {
+		$vin = $this->ReadPropertyString('vin');
+
         $txt = '';
 
         $cdata = '';
         $msg = '';
-        $r = $this->do_ApiCall('/usermanagement/users/v1/VW/DE/vehicles/', $cdata, $msg);
+        $r = $this->do_ApiCall('/usermanagement/users/v1/VW/DE/vehicles', $cdata, $msg);
         if ($r == false) {
             $txt .= $this->translate('invalid account-data') . PHP_EOL;
             $txt .= PHP_EOL;
@@ -78,6 +105,30 @@ class VWCarNet extends IPSModule
             }
         } else {
             $txt = $this->translate('valid account-data') . PHP_EOL;
+
+			$jdata = json_decode($cdata, true);
+			$vehicles = $jdata['userVehicles']['vehicle'];
+			$fnd = false;
+			foreach ($vehicles as $vehicle) {
+				if ($vin == $vehicle) $fnd = true;
+			}
+
+			$txt .= PHP_EOL;
+			if ($vin == "") {
+				$txt .= $this->translate('No VIN configured') . PHP_EOL;
+			} else {
+				if ($fnd) {
+					$txt .= $this->translate('The given VIN is registered in this account') . PHP_EOL;
+				} else {
+					$txt .= $this->translate('The given VIN is not registered in this account') . PHP_EOL;
+				}
+			}
+
+			$txt .= PHP_EOL;
+			$txt .= $this->translate('List of VIN') . PHP_EOL;
+			foreach ($vehicles as $vehicle) {
+				$txt .= '  ' . $vehicle . PHP_EOL;
+			}
         }
 
         echo $txt;
@@ -85,7 +136,7 @@ class VWCarNet extends IPSModule
 
     private function getToken(&$msg)
     {
-        $userid = $this->ReadPropertyString('userid');
+        $username = $this->ReadPropertyString('username');
         $password = $this->ReadPropertyString('password');
 
         $dtoken = $this->GetBuffer('Token');
@@ -106,9 +157,6 @@ class VWCarNet extends IPSModule
                     'password'   => $password
                 ];
 
-            $jdata = do_HttpRequest($auth_url, '', $header, $postdata, 'POST');
-            $token = $jdata['access_token'];
-
             $cdata = '';
             $msg = '';
             $statuscode = $this->do_HttpRequest('/core/auth/v1/VW/DE/token', '', $header, $postdata, 'POST', $cdata, $msg);
@@ -125,8 +173,7 @@ class VWCarNet extends IPSModule
             $this->SendDebug(__FUNCTION__, 'jdata=' . print_r($jdata, true), 0);
 
             $token = $jdata['access_token'];
-            //$expires_in = $jdata['expires_in'];
-            $expires_in = 0;
+            $expires_in = $jdata['expires_in'];
 
             $jtoken = [
                     'token'      => $token,
@@ -157,7 +204,7 @@ class VWCarNet extends IPSModule
                 ];
 
         $msg = '';
-        $statuscode = $this->do_HttpRequest($func, $params, $header, '', 'GET', $data, $msg);
+        $statuscode = $this->do_HttpRequest($func, '', $header, '', 'GET', $data, $msg);
         $this->SendDebug(__FUNCTION__, 'statuscode=' . $statuscode . ', data=' . print_r($data, true), 0);
         if ($statuscode != 0) {
             $this->SetStatus($statuscode);
@@ -179,11 +226,11 @@ class VWCarNet extends IPSModule
             }
         }
 
-        echo 'http-' . $mode . ': url=' . $url . PHP_EOL;
-        echo '    header=' . print_r($header, true) . PHP_EOL;
+		$this->SendDebug(__FUNCTION__, 'http-' . $mode . ': url=' . $url, 0);
+		$this->SendDebug(__FUNCTION__, '    header=' . print_r($header, true), 0);
         if ($postdata != '') {
             $postdata = http_build_query($postdata);
-            echo '    postdata=' . $postdata . PHP_EOL;
+            $this->SendDebug(__FUNCTION__, '    postdata=' . $postdata, 0);
         }
 
         $time_start = microtime(true);
@@ -192,20 +239,20 @@ class VWCarNet extends IPSModule
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
         switch ($mode) {
-                case 'GET':
-                    break;
-                case 'POST':
-                    curl_setopt($ch, CURLOPT_POST, true);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-                    break;
-                case 'PUT':
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $mode);
-                    break;
-                case 'DELETE':
-                    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $mode);
-                    break;
-            }
+			case 'GET':
+				break;
+			case 'POST':
+				curl_setopt($ch, CURLOPT_POST, true);
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+				break;
+			case 'PUT':
+				curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $mode);
+				break;
+			case 'DELETE':
+				curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $mode);
+				break;
+		}
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         $cdata = curl_exec($ch);
@@ -214,29 +261,18 @@ class VWCarNet extends IPSModule
         curl_close($ch);
 
         $duration = round(microtime(true) - $time_start, 2);
-
-        echo ' => httpcode=' . $httpcode . ', duration=' . $duration . 's' . PHP_EOL;
-        echo ' => cdata=' . $cdata . PHP_EOL;
-        $jdata = json_decode($cdata, true);
-        echo ' => jdata=' . print_r($jdata, true) . PHP_EOL;
+		$this->SendDebug(__FUNCTION__, ' => httpcode=' . $httpcode . ', duration=' . $duration . 's', 0);
+		$this->SendDebug(__FUNCTION__, ' => cdata=' . $cdata, 0);
 
         $statuscode = 0;
         $err = '';
         $msg = '';
         $data = '';
 
-        // 200 = ok
-        // 400 = bad request
-        // 401 = unauthorized
-        // 404 = not found
-        // 405 = method not allowed
-        // 500 = internal server error
-        // 503 = unavailable
-
         if ($cdata != '') {
             $jdata = json_decode($cdata, true);
-            if (isset($jdata['message'])) {
-                $msg = $jdata['message'];
+            if (isset($jdata['"error"'])) {
+                $msg = $jdata['description'];
             }
         }
 
@@ -261,5 +297,61 @@ class VWCarNet extends IPSModule
         }
 
         return $statuscode;
+    }
+
+    private function getStatus()
+	{
+		$vin = $this->ReadPropertyString('vin');
+		$func = '/bs/vsr/v1/VW/DE/vehicles/' . $vin . '/status';
+
+        $cdata = '';
+        $msg = '';
+        $r = $this->do_ApiCall($func, $cdata, $msg);
+        if ($r) {
+			$jdata = json_decode($cdata, true);
+            $this->SendDebug(__FUNCTION__, 'jdata=' . print_r($jdata, true), 0);
+		}
+    }
+
+    private function getPosition()
+	{
+		$vin = $this->ReadPropertyString('vin');
+		$func = '/bs/cf/v1/VW/DE/vehicles/' . $vin . '/position';
+
+        $cdata = '';
+        $msg = '';
+        $r = $this->do_ApiCall($func, $cdata, $msg);
+        if ($r) {
+			$jdata = json_decode($cdata, true);
+            $this->SendDebug(__FUNCTION__, 'jdata=' . print_r($jdata, true), 0);
+		}
+    }
+
+    private function getClimater()
+	{
+		$vin = $this->ReadPropertyString('vin');
+		$func = '/bs/climatisation/v1/VW/DE/vehicles/' . $vin . '/climater';
+
+        $cdata = '';
+        $msg = '';
+        $r = $this->do_ApiCall($func, $cdata, $msg);
+        if ($r) {
+			$jdata = json_decode($cdata, true);
+            $this->SendDebug(__FUNCTION__, 'jdata=' . print_r($jdata, true), 0);
+		}
+    }
+
+    private function getCharger()
+	{
+		$vin = $this->ReadPropertyString('vin');
+		$func = '/bs/batterycharge/v1/VW/DE/vehicles/' . $vin . '/charger';
+
+        $cdata = '';
+        $msg = '';
+        $r = $this->do_ApiCall($func, $cdata, $msg);
+        if ($r) {
+			$jdata = json_decode($cdata, true);
+            $this->SendDebug(__FUNCTION__, 'jdata=' . print_r($jdata, true), 0);
+		}
     }
 }

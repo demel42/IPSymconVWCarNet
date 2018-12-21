@@ -5,13 +5,20 @@
 			"User-ID (email)": "Benutzer (EMail)",
 			"Password": "Passwort",
 			"VIN": "FIN",
+			"Update data every X minutes": "Daten alle X Minuten aktualisieren",
+			"Minutes": "Minuten",
 
 			"Test access": "Zugang prüfen",
+			"Update data": "Daten aktualisieren",
 			"Module description": "Modulbeschreibung",
 
 			"invalid account-data": "ungültige Zugangsdaten",
 			"message": "Mitteilung",
 			"valid account-data": "gültige Zugangsdaten",
+			"List of VIN": "Liste der FIN",
+			"No VIN configured" : "Keine FIN konfiguriert",
+			"The given VIN is registered in this account": "Die angegebene FIN ist im Konto registriert",
+			"The given VIN is not registered in this account": "Die angegebene FIN ist in dem Konto nicht registriert",
 
 			"Instance getting created": "Instanz wird erstellt",
 			"Instance is active": "Instanz ist aktiv",

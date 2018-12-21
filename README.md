@@ -51,13 +51,16 @@ Anschließend erscheint ein Eintrag für das Modul in der Liste der Instanz _Mod
 | :-----------------------: | :-----:  | :----------: | :----------: |
 | Benutzer                  | string   |              | Car-Net-Konto: Benutzerkennung |
 | Passwort                  | string   |              | Car-Net-Konto: Passwort |
-| VIN                       | string   |              | Fahrzeug-Identifikationsnummer |
+| FIN                       | string   |              | Fahrzeug-Identifikations-Nummer |
+|                           |          |              |              |
+| Aktualisiere Daten ...    | integer  | 60           | Aktualisierungsintervall, Angabe in Minuten |
 
 #### Schaltflächen
 
 | Bezeichnung                  | Beschreibung |
 | :--------------------------: | :----------: |
 | Zugang prüfen                | Prüft, ob die Angaben korrekt sind |
+| Aktualisiere Daten           | führt eine sofortige Aktualisierung durch |
 
 ### Variablenprofile
 
