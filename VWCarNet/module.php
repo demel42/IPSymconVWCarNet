@@ -296,7 +296,7 @@ class VWCarNet extends IPSModule
         }
 
         if ($statuscode) {
-            echo 'url=' . $url . ' => statuscode=' . $statuscode . ', err=' . $err . PHP_EOL;
+            $this->LogMessage('url=' . $url . ' => statuscode=' . $statuscode . ', err=' . $err, KL_WARNING);
             $this->SendDebug(__FUNCTION__, ' => statuscode=' . $statuscode . ', err=' . $err . ', msg=' . $msg, 0);
         }
 
