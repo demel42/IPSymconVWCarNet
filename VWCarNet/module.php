@@ -311,9 +311,71 @@ class VWCarNet extends IPSModule
         $cdata = '';
         $msg = '';
         $r = $this->do_ApiCall($func, $cdata, $msg);
+/*
+$r = true;
+$cdata = '{"StoredVehicleDataResponse":{"vin":"WVWZZZAAZHDxxxxxx","vehicleData":{"data": [{"id":"0x0101010001","field": [{"id":"0x0101010001","tsCarSentUtc":"2018-12-16T12:53:40Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:40Z","milCarCaptured":0,"milCarSent":0,"value":"echo"}]},{"id":"0x0101010002","field": [{"id":"0x0101010002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"8096"}]},{"id":"0x0203FFFFFF","field": [{"id":"0x0203010001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-1700","unit":"km"},{"id":"0x0203010002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-17","unit":"d"},{"id":"0x0203010003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-22000","unit":"km"},{"id":"0x0203010004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-29","unit":"d"},{"id":"0x0203010005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"1","textId":"interval.inspection.warn"},{"id":"0x0203010006","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"1","textId":"interval.inspection.warn"},{"id":"0x0203010007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"257","unit":"km"}]},{"id":"0x030101FFFF","field": [{"id":"0x0301010001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"status_parking_light_off"}]},{"id":"0x030102FFFF","field": [{"id":"0x0301020001","tsCarSentUtc":"2018-12-16T12:53:40Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:40Z","milCarCaptured":0,"milCarSent":0,"value":"2765","unit":"dK"}]},{"id":"0x030103FFFF","field": [{"id":"0x0301030001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"parking_brake_inactive"},{"id":"0x0301030002","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"30","unit":"%","textId":"soc_ok"},{"id":"0x0301030003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"%","textId":"bem_ok"},{"id":"0x0301030004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"km/h","textId":"speed_ok"},{"id":"0x0301030006","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"24","unit":"km","textId":"range_ok"},{"id":"0x0301030007","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"3","textId":"engine_type_electric"},{"id":"0x030103000A","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"100","unit":"%","textId":"fuel_level_ok"},{"id":"0x030103000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"fuel_level_measured"}]},{"id":"0x030104FFFF","field": [{"id":"0x0301040001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040006","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040008","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040009","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x030104000A","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x030104000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x030104000C","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x030104000D","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x030104000E","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x030104000F","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040010","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unlocked"},{"id":"0x0301040011","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040012","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"}]},{"id":"0x030105FFFF","field": [{"id":"0x0301050001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050009","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x030105000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"window_closed"},{"id":"0x030105000C","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"%"}]}]}}}';
+*/
+
         if ($r) {
             $jdata = json_decode($cdata, true);
             $this->SendDebug(__FUNCTION__, 'jdata=' . print_r($jdata, true), 0);
+
+			$mileage = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.1.field.0.value', 0);
+			$this->SendDebug(__FUNCTION__, 'mileage=' . $mileage, 0);
+
+			$serviceInKm = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.2.field.2.value', 0);
+			$serviceInKm *= -1;
+			$this->SendDebug(__FUNCTION__, 'serviceInKm=' . $serviceInKm, 0);
+
+			$serviceInDays = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.2.field.3.value', 0);
+			$serviceInDays *= -1;
+			$this->SendDebug(__FUNCTION__, 'serviceInDays=' . $serviceInDays, 0);
+
+			$_parkingLight = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.3.field.0.value', 0);
+			switch ($_parkingLight) {
+				case 2:
+					$parkingLight = $this->translate('left') . '=' . $this->translate('off') . ', ' . $this->translate('right') . '=' . $this->translate('off');
+					break;
+				case 3:
+					$parkingLight = $this->translate('left') . '=' . $this->translate('on') . ', ' . $this->translate('right') . '=' . $this->translate('off');
+					break;
+				case 4:
+					$parkingLight = $this->translate('left') . '=' . $this->translate('off') . ', ' . $this->translate('right') . '=' . $this->translate('on');
+					break;
+				case 5:
+					$parkingLight = $this->translate('left') . '=' . $this->translate('on') . ', ' . $this->translate('right') . '=' . $this->translate('on');
+					break;
+				default:
+					$parkingLight = $this->translate('unknown value') . ' ' . $_parkingLight;
+					break;
+			}
+			$this->SendDebug(__FUNCTION__, 'parkingLight=' . $_parkingLight . ' => ' . $parkingLight, 0);
+
+			$_parkingBrake = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.5.field.0.value', 0);
+			switch ($_parkingBrake) {
+				case 0:
+					$parkingBrake = $this->translate('inactive');
+					break;
+				case 1:
+					$parkingBrake = $this->translate('active');
+					break;
+				default:
+					$parkingBrake = $this->translate('unknown value') . ' ' . $_parkingBrake;
+					break;
+			}
+			$this->SendDebug(__FUNCTION__, 'parkingBrake=' . $_parkingBrake . ' => ' . $parkingBrake, 0);
+
+			for ($d = 0; $d < 10; $d++) {
+				for ($f = 0; $f < 99; $f++) {
+					$s = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.' . $d . '.field.' . $f . '.value', '');
+					if ($s != "") {
+						$r = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.' . $d . '.field.' . $f . '.textId', '');
+						$p = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.' . $d . '.field.' . $f . '.unit', '');
+						$this->SendDebug(__FUNCTION__, '.data.' . $d . '.field.' . $f . '=' . $s . ' ' . $r . ' ' . $p, 0);
+					}
+				}
+			}
+
         }
     }
 
@@ -325,9 +387,36 @@ class VWCarNet extends IPSModule
         $cdata = '';
         $msg = '';
         $r = $this->do_ApiCall($func, $cdata, $msg);
+
+/*
+$r = true;
+$cdata = '{"findCarResponse":{"Position":{"timestampCarSent":"2018-12-16T13:28:28","timestampTssReceived":"2018-12-16T12:28:28Z","carCoordinate":{"latitude":48666325,"longitude":9233152},"timestampCarSentUTC":"2018-12-16T12:28:29Z","timestampCarCaptured":"2018-12-16T13:28:28"},"parkingTimeUTC":"2018-12-16T12:28:29Z"}}';
+*/
         if ($r) {
             $jdata = json_decode($cdata, true);
             $this->SendDebug(__FUNCTION__, 'jdata=' . print_r($jdata, true), 0);
+
+			$_lat = $this->GetArrayElem($jdata, 'findCarResponse.Position.carCoordinate.latitude', '');
+			if ($_lat != "") {
+				$lat = substr($_lat, 0, strlen($_lat) - 6) . '.' . substr($_lat, strlen($_lat) - 6);
+			} else {
+				$lat = 0;
+			}
+			$_lon = $this->GetArrayElem($jdata, 'findCarResponse.Position.carCoordinate.longitude', '');
+			if ($_lat != "") {
+				$lon = substr($_lon, 0, strlen($_lon) - 6) . '.' . substr($_lon, strlen($_lon) - 6);
+			} else {
+				$lon = 0;
+			}
+			$this->SendDebug(__FUNCTION__, 'lat=' . $_lat . ' => ' . $lat . ', lon=' . $_lon . ' => ' . $lon, 0);
+
+			$_timestampCarSent = $this->GetArrayElem($jdata, 'findCarResponse.Position.timestampCarSent', '');
+			$timestampCarSent = strtotime($_timestampCarSent);
+			$this->SendDebug(__FUNCTION__, 'timestampCarSent=' . $_timestampCarSent . ' => ' . date("d.m.Y H:i", $timestampCarSent), 0);
+
+			$_parkingTime = $this->GetArrayElem($jdata, 'findCarResponse.parkingTimeUTC', '');
+			$parkingTime = strtotime($_parkingTime);
+			$this->SendDebug(__FUNCTION__, 'parkingTime=' . $_parkingTime . ' => ' . date("d.m.Y H:i", $parkingTime), 0);
         }
     }
 
@@ -342,6 +431,23 @@ class VWCarNet extends IPSModule
         if ($r) {
             $jdata = json_decode($cdata, true);
             $this->SendDebug(__FUNCTION__, 'jdata=' . print_r($jdata, true), 0);
+
+			$_carTemp = $this->GetArrayElem($jdata, 'climater.status.temperatureStatusData.outdoorTemperature.content', '');
+			if ($_carTemp != '') {
+				$carTemp = (float($__carTemp) / 100.0) - 273;
+			} else {
+				$carTemp = 0;
+			}
+			$this->SendDebug(__FUNCTION__, 'carTemp=' . $_carTemp . ' => ' . $carTemp, 0);
+
+			$climateHeatingStatus = $this->GetArrayElem($jdata, 'climater.status.climatisationStatusData.climatisationState.content', '');
+			$this->SendDebug(__FUNCTION__, 'climateHeatingStatus=' . $climateHeatingStatus, 0);
+
+			$climateHeatingWindowFrontStatus = $this->GetArrayElem($jdata, 'climater.status.windowHeatingStatusData.windowHeatingStateFront.content', '');
+			$this->SendDebug(__FUNCTION__, 'climateHeatingWindowFrontStatus=' . $climateHeatingWindowFrontStatus, 0);
+
+			$climateHeatingWindowRearStatus = $this->GetArrayElem($jdata, 'climater.status.windowHeatingStatusData.windowHeatingStateRear.content', '');
+			$this->SendDebug(__FUNCTION__, 'climateHeatingWindowRearStatus=' . $climateHeatingWindowRearStatus, 0);
         }
     }
 
@@ -356,6 +462,40 @@ class VWCarNet extends IPSModule
         if ($r) {
             $jdata = json_decode($cdata, true);
             $this->SendDebug(__FUNCTION__, 'jdata=' . print_r($jdata, true), 0);
+
+			$maxChargeCurrent = $this->GetArrayElem($jdata, 'charger.settings.maxChargeCurrent.content', '');
+			$this->SendDebug(__FUNCTION__, 'maxChargeCurrent=' . $maxChargeCurrent, 0);
+
+			$chargingMode = $this->GetArrayElem($jdata, 'charger.status.chargingStatusData.chargingMode.content', '');
+			$this->SendDebug(__FUNCTION__, 'chargingMode=' . $chargingMode, 0);
+			$chargingReason = $this->GetArrayElem($jdata, 'charger.status.chargingStatusData.chargingReason.content', '');
+			$this->SendDebug(__FUNCTION__, 'chargingReason=' . $chargingReason, 0);
+			$externalPowerSupplyState = $this->GetArrayElem($jdata, 'charger.status.chargingStatusData.externalPowerSupplyState.content', '');
+			$this->SendDebug(__FUNCTION__, 'externalPowerSupplyState=' . $externalPowerSupplyState, 0);
+			$energyFlow = $this->GetArrayElem($jdata, 'charger.status.chargingStatusData.energyFlow.content', '');
+			$this->SendDebug(__FUNCTION__, 'energyFlow=' . $energyFlow, 0);
+			$chargingState = $this->GetArrayElem($jdata, 'charger.status.chargingStatusData.chargingState.content', '');
+			$this->SendDebug(__FUNCTION__, 'chargingState=' . $chargingState, 0);
+
+			$primaryEngineRange = $this->GetArrayElem($jdata, 'charger.status.cruisingRangeStatusData.primaryEngineRange.content', '');
+			$this->SendDebug(__FUNCTION__, 'primaryEngineRange=' . $primaryEngineRange, 0);
+
+			$stateOfCharge = $this->GetArrayElem($jdata, 'charger.status.batteryStatusData.stateOfCharge.content', '');
+			$this->SendDebug(__FUNCTION__, 'stateOfCharge=' . $stateOfCharge, 0);
+			$remainingChargingTime = $this->GetArrayElem($jdata, 'charger.status.batteryStatusData.remainingChargingTime.content', '');
+			$this->SendDebug(__FUNCTION__, 'remainingChargingTime=' . $remainingChargingTime, 0);
+			$remainingChargingTimeTargetSOC = $this->GetArrayElem($jdata, 'charger.status.batteryStatusData.remainingChargingTimeTargetSOC.content', '');
+			$this->SendDebug(__FUNCTION__, 'remainingChargingTimeTargetSOC=' . $remainingChargingTimeTargetSOC, 0);
+
+			$ledColor = $this->GetArrayElem($jdata, 'charger.status.ledStatusData.ledColor.content', '');
+			$this->SendDebug(__FUNCTION__, 'ledColor=' . $ledColor, 0);
+			$ledState = $this->GetArrayElem($jdata, 'charger.status.ledStatusData.ledState.content', '');
+			$this->SendDebug(__FUNCTION__, 'ledState=' . $ledState, 0);
+
+			$plugState = $this->GetArrayElem($jdata, 'charger.status.ledStatusData.plugState.content', '');
+			$this->SendDebug(__FUNCTION__, 'plugState=' . $plugState, 0);
+			$lockState = $this->GetArrayElem($jdata, 'charger.status.ledStatusData.lockState.content', '');
+			$this->SendDebug(__FUNCTION__, 'lockState=' . $lockState, 0);
         }
     }
 }
