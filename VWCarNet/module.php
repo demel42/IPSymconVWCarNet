@@ -53,10 +53,13 @@ class VWCarNet extends IPSModule
         $this->MaintainVariable('BatteryLevel', $this->Translate('Battery level'), VARIABLETYPE_FLOAT, 'VWCarNet.BatteryLevel', $vpos++, $with_electric);
 
         $vpos = 50;
-        $this->MaintainVariable('DriverDoorState', $this->Translate('Driver door state'), VARIABLETYPE_STRING, '', $vpos++, true);
+        $this->MaintainVariable('DriverDoor', $this->Translate('Driver door'), VARIABLETYPE_STRING, '', $vpos++, true);
+		$this->MaintainVariable('FrontPassengerDoor', $this->Translate('Front passenger door'), VARIABLETYPE_STRING, '', $vpos++, true);
+		$this->MaintainVariable('RearLeftDoor', $this->Translate('Rear left door'), VARIABLETYPE_STRING, '', $vpos++, true);
+		$this->MaintainVariable('RearRightDoor', $this->Translate('Rear right door'), VARIABLETYPE_STRING, '', $vpos++, true);
 
         $vpos = 60;
-        $this->MaintainVariable('SunRoofState', $this->Translate('Sunroof state'), VARIABLETYPE_STRING, '', $vpos++, true);
+        $this->MaintainVariable('SunRoof', $this->Translate('Sunroof'), VARIABLETYPE_STRING, '', $vpos++, true);
 
         $vpos = 70;
         $this->MaintainVariable('ParkingLight', $this->Translate('Parking light'), VARIABLETYPE_STRING, '', $vpos++, true);
@@ -474,15 +477,39 @@ class VWCarNet extends IPSModule
             $usedFields[6][0] = true;
             $driverDoorCloseState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.1.value', 0);
             $usedFields[6][1] = true;
-            $driverDoorState = $this->decode_doorState($driverDoorLockState, $driverDoorCloseState);
-            $this->SendDebug(__FUNCTION__, utf8_decode('driverDoorState=' . $driverDoorLockState . '/' . $driverDoorCloseState . ' => ' . $driverDoorState), 0);
-            $this->SetValue('DriverDoorState', $driverDoorState);
+            $driverDoor = $this->decode_doorState($driverDoorLockState, $driverDoorCloseState);
+            $this->SendDebug(__FUNCTION__, utf8_decode('driverDoor=' . $driverDoorLockState . '/' . $driverDoorCloseState . ' => ' . $driverDoor), 0);
+            $this->SetValue('DriverDoor', $driverDoor);
+
+            $frontPassengerDoorLockState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.2.value', 0);
+            $usedFields[6][2] = true;
+            $frontPassengerDoorCloseState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.3.value', 0);
+            $usedFields[6][3] = true;
+            $frontPassengerDoor = $this->decode_doorState($frontPassengerDoorLockState, $frontPassengerDoorCloseState);
+            $this->SendDebug(__FUNCTION__, utf8_decode('frontPassengerDoor=' . $frontPassengerDoorLockState . '/' . $frontPassengerDoorCloseState . ' => ' . $frontPassengerDoor), 0);
+            $this->SetValue('FrontPassengerDoor', $frontPassengerDoor);
+
+            $rearLeftDoorLockState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.4.value', 0);
+            $usedFields[6][4] = true;
+            $rearLeftDoorCloseState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.5.value', 0);
+            $usedFields[6][5] = true;
+            $rearLeftDoor = $this->decode_doorState($rearLeftDoorLockState, $rearLeftDoorCloseState);
+            $this->SendDebug(__FUNCTION__, utf8_decode('rearLeftDoor=' . $rearLeftDoorLockState . '/' . $rearLeftDoorCloseState . ' => ' . $rearLeftDoor), 0);
+            $this->SetValue('RearLeftDoor', $rearLeftDoor);
+
+            $rearRightDoorLockState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.6.value', 0);
+            $usedFields[6][6] = true;
+            $rearRightDoorCloseState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.7.value', 0);
+            $usedFields[6][7] = true;
+            $rearRightDoor = $this->decode_doorState($rearRightDoorLockState, $rearRightDoorCloseState);
+            $this->SendDebug(__FUNCTION__, utf8_decode('rearRightDoor=' . $rearRightDoorLockState . '/' . $rearRightDoorCloseState . ' => ' . $rearRightDoor), 0);
+            $this->SetValue('RearRightDoor', $rearRightDoor);
 
             $_sunroofState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.7.field.5.value', 0);
             $usedFields[7][5] = true;
             $sunroofState = $this->decode_windowState($_sunroofState);
             $this->SendDebug(__FUNCTION__, utf8_decode('sunroofState=' . $_sunroofState . ' => ' . $sunroofState), 0);
-            $this->SetValue('SunRoofState', $sunroofState);
+            $this->SetValue('SunRoof', $sunroofState);
 
             $this->SendDebug(__FUNCTION__, utf8_decode('unused fields'), 0);
             for ($d = 0; $d < 10; $d++) {
@@ -561,7 +588,7 @@ class VWCarNet extends IPSModule
 
             $_carTemp = $this->GetArrayElem($jdata, 'climater.status.temperatureStatusData.outdoorTemperature.content', '');
             if ($_carTemp != '') {
-                $carTemp = (floatval($__carTemp) / 100.0) - 273;
+                $carTemp = (floatval($_carTemp) / 100.0) - 273;
             } else {
                 $carTemp = 0;
             }
@@ -689,6 +716,9 @@ class VWCarNet extends IPSModule
     private function decode_doorState($doorLockState, $doorCloseState)
     {
         switch ($doorLockState) {
+            case 0:
+                $retval = $this->Translate('unsupported');
+                break;
             case 2:
                 $lockState = $this->Translate('locked');
                 break;
@@ -702,6 +732,9 @@ class VWCarNet extends IPSModule
                 break;
         }
         switch ($doorCloseState) {
+            case 0:
+                $retval = $this->Translate('unsupported');
+                break;
             case 2:
                 $closeState = $this->Translate('opened');
                 break;
@@ -721,6 +754,9 @@ class VWCarNet extends IPSModule
     private function decode_windowState($windowState)
     {
         switch ($windowState) {
+            case 0:
+                $retval = $this->Translate('unsupported');
+                break;
             case 2:
                 $retval = $this->Translate('opened');
                 break;
