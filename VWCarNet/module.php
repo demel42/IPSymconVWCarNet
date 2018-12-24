@@ -54,9 +54,9 @@ class VWCarNet extends IPSModule
 
         $vpos = 50;
         $this->MaintainVariable('DriverDoor', $this->Translate('Driver door'), VARIABLETYPE_STRING, '', $vpos++, true);
-		$this->MaintainVariable('FrontPassengerDoor', $this->Translate('Front passenger door'), VARIABLETYPE_STRING, '', $vpos++, true);
-		$this->MaintainVariable('RearLeftDoor', $this->Translate('Rear left door'), VARIABLETYPE_STRING, '', $vpos++, true);
-		$this->MaintainVariable('RearRightDoor', $this->Translate('Rear right door'), VARIABLETYPE_STRING, '', $vpos++, true);
+        $this->MaintainVariable('FrontPassengerDoor', $this->Translate('Front passenger door'), VARIABLETYPE_STRING, '', $vpos++, true);
+        $this->MaintainVariable('RearLeftDoor', $this->Translate('Rear left door'), VARIABLETYPE_STRING, '', $vpos++, true);
+        $this->MaintainVariable('RearRightDoor', $this->Translate('Rear right door'), VARIABLETYPE_STRING, '', $vpos++, true);
 
         $vpos = 60;
         $this->MaintainVariable('SunRoof', $this->Translate('Sunroof'), VARIABLETYPE_STRING, '', $vpos++, true);
