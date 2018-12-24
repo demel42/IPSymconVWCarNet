@@ -4,15 +4,14 @@ require_once __DIR__ . '/../libs/common.php';  // globale Funktionen
 
 // Model
 if (!defined('VW_MODEL_STANDARD')) {
-	define('VW_MODEL_STANDARD', 0);
+    define('VW_MODEL_STANDARD', 0);
 }
 if (!defined('VW_MODEL_HYBRID')) {
-	define('VW_MODEL_HYBRID', 1);
+    define('VW_MODEL_HYBRID', 1);
 }
 if (!defined('VW_MODEL_ELECTRIC')) {
     define('VW_MODEL_ELECTRIC', 2);
 }
-
 
 class VWCarNet extends IPSModule
 {
@@ -26,18 +25,18 @@ class VWCarNet extends IPSModule
         $this->RegisterPropertyString('password', '');
         $this->RegisterPropertyString('vin', '');
 
-		$this->RegisterPropertyInteger('model', VW_MODEL_STANDARD);
+        $this->RegisterPropertyInteger('model', VW_MODEL_STANDARD);
 
         $this->RegisterPropertyInteger('update_interval', 5);
 
         $this->RegisterTimer('UpdateData', 0, 'VWCarNet_UpdateData(' . $this->InstanceID . ');');
 
-		$this->CreateVarProfile('VWCarNet.Mileage', VARIABLETYPE_INTEGER, ' km', 0, 0, 0, 0, 'Distance');
-		$this->CreateVarProfile('VWCarNet.Days', VARIABLETYPE_INTEGER, ' ' . $this->Translate('days'), 0, 0, 0, 0, '');
+        $this->CreateVarProfile('VWCarNet.Mileage', VARIABLETYPE_INTEGER, ' km', 0, 0, 0, 0, 'Distance');
+        $this->CreateVarProfile('VWCarNet.Days', VARIABLETYPE_INTEGER, ' ' . $this->Translate('days'), 0, 0, 0, 0, '');
 
-		$this->CreateVarProfile('VWCarNet.Location', VARIABLETYPE_FLOAT, ' °', 0, 0, 0, 5, '');
-		$this->CreateVarProfile('VWCarNet.Temperature', VARIABLETYPE_FLOAT, ' °C', 0, 0, 0, 0, '');
-		$this->CreateVarProfile('VWCarNet.BatteryLevel', VARIABLETYPE_FLOAT, ' %', 0, 0, 0, 0, '');
+        $this->CreateVarProfile('VWCarNet.Location', VARIABLETYPE_FLOAT, ' °', 0, 0, 0, 5, '');
+        $this->CreateVarProfile('VWCarNet.Temperature', VARIABLETYPE_FLOAT, ' °C', 0, 0, 0, 0, '');
+        $this->CreateVarProfile('VWCarNet.BatteryLevel', VARIABLETYPE_FLOAT, ' %', 0, 0, 0, 0, '');
     }
 
     public function ApplyChanges()
@@ -45,58 +44,57 @@ class VWCarNet extends IPSModule
         parent::ApplyChanges();
 
         $model = $this->ReadPropertyInteger('model');
-		$with_electric = $model != VW_MODEL_STANDARD;
+        $with_electric = $model != VW_MODEL_STANDARD;
 
-		$vpos = 1;
-		$this->MaintainVariable('Mileage', $this->Translate('Mileage'), VARIABLETYPE_INTEGER, 'VWCarNet.Mileage', $vpos++, true);
-		$this->MaintainVariable('Range', $this->Translate('Range'), VARIABLETYPE_INTEGER, 'VWCarNet.Mileage', $vpos++, true);
+        $vpos = 1;
+        $this->MaintainVariable('Mileage', $this->Translate('Mileage'), VARIABLETYPE_INTEGER, 'VWCarNet.Mileage', $vpos++, true);
+        $this->MaintainVariable('Range', $this->Translate('Range'), VARIABLETYPE_INTEGER, 'VWCarNet.Mileage', $vpos++, true);
 
-		$this->MaintainVariable('BatteryLevel', $this->Translate('Battery level'), VARIABLETYPE_FLOAT, 'VWCarNet.BatteryLevel', $vpos++, $with_electric);
+        $this->MaintainVariable('BatteryLevel', $this->Translate('Battery level'), VARIABLETYPE_FLOAT, 'VWCarNet.BatteryLevel', $vpos++, $with_electric);
 
-		$vpos = 50;
-		$this->MaintainVariable('DriverDoorState', $this->Translate('Driver door state'), VARIABLETYPE_STRING, '', $vpos++, true);
+        $vpos = 50;
+        $this->MaintainVariable('DriverDoorState', $this->Translate('Driver door state'), VARIABLETYPE_STRING, '', $vpos++, true);
 
-		$vpos = 60;
-		$this->MaintainVariable('SunRoofState', $this->Translate('Sunroof state'), VARIABLETYPE_STRING, '', $vpos++, true);
+        $vpos = 60;
+        $this->MaintainVariable('SunRoofState', $this->Translate('Sunroof state'), VARIABLETYPE_STRING, '', $vpos++, true);
 
-		$vpos = 70;
-		$this->MaintainVariable('ParkingLight', $this->Translate('Parking light'), VARIABLETYPE_STRING, '', $vpos++, true);
-		$this->MaintainVariable('ParkingBreak', $this->Translate('Parking break'), VARIABLETYPE_STRING, '', $vpos++, true);
+        $vpos = 70;
+        $this->MaintainVariable('ParkingLight', $this->Translate('Parking light'), VARIABLETYPE_STRING, '', $vpos++, true);
+        $this->MaintainVariable('ParkingBreak', $this->Translate('Parking break'), VARIABLETYPE_STRING, '', $vpos++, true);
 
-		$this->MaintainVariable('TemperatureOutside', $this->Translate('Temperature outside'), VARIABLETYPE_FLOAT, 'VWCarNet.Temperature', $vpos++, true);
+        $this->MaintainVariable('TemperatureOutside', $this->Translate('Temperature outside'), VARIABLETYPE_FLOAT, 'VWCarNet.Temperature', $vpos++, true);
 
-		$vpos = 80;
-		$this->MaintainVariable('LastLongitude', $this->Translate('Last position (longitude)'), VARIABLETYPE_FLOAT, 'VWCarNet.Location', $vpos++, true);
-		$this->MaintainVariable('LastLatitude', $this->Translate('Last position (latitude)'), VARIABLETYPE_FLOAT, 'VWCarNet.Location', $vpos++, true);
-		$this->MaintainVariable('PositionTimestamp', $this->Translate('Timestamp of last position'), VARIABLETYPE_INTEGER, '~UnixTimestamp', $vpos++, true);
-		$this->MaintainVariable('ParkingTimestamp', $this->Translate('Timestamp of parking'), VARIABLETYPE_INTEGER, '~UnixTimestamp', $vpos++, true);
+        $vpos = 80;
+        $this->MaintainVariable('LastLongitude', $this->Translate('Last position (longitude)'), VARIABLETYPE_FLOAT, 'VWCarNet.Location', $vpos++, true);
+        $this->MaintainVariable('LastLatitude', $this->Translate('Last position (latitude)'), VARIABLETYPE_FLOAT, 'VWCarNet.Location', $vpos++, true);
+        $this->MaintainVariable('PositionTimestamp', $this->Translate('Timestamp of last position'), VARIABLETYPE_INTEGER, '~UnixTimestamp', $vpos++, true);
+        $this->MaintainVariable('ParkingTimestamp', $this->Translate('Timestamp of parking'), VARIABLETYPE_INTEGER, '~UnixTimestamp', $vpos++, true);
 
-		$vpos = 90;
-		$this->MaintainVariable('ServiceInKm', $this->Translate('Service in'), VARIABLETYPE_INTEGER, 'VWCarNet.Mileage', $vpos++, true);
-		$this->MaintainVariable('ServiceInDays', $this->Translate('Service in'), VARIABLETYPE_INTEGER, 'VWCarNet.Days', $vpos++, true);
-		$this->MaintainVariable('ServiceMessage', $this->Translate('Service message'), VARIABLETYPE_STRING, '', $vpos++, true);
+        $vpos = 90;
+        $this->MaintainVariable('ServiceInKm', $this->Translate('Service in'), VARIABLETYPE_INTEGER, 'VWCarNet.Mileage', $vpos++, true);
+        $this->MaintainVariable('ServiceInDays', $this->Translate('Service in'), VARIABLETYPE_INTEGER, 'VWCarNet.Days', $vpos++, true);
+        $this->MaintainVariable('ServiceMessage', $this->Translate('Service message'), VARIABLETYPE_STRING, '', $vpos++, true);
 
-		$vpos = 100;
-/*
-	maxChargeCurrent
-	chargingMode
-	chargingReason
-	externalPowerSupplyState
-	energyFlow
-	chargingState
-	remainingChargingTime
-*/
+        $vpos = 100;
+        /*
+            maxChargeCurrent
+            chargingMode
+            chargingReason
+            externalPowerSupplyState
+            energyFlow
+            chargingState
+            remainingChargingTime
+        */
 
-		$vpos = 120;
-/*
-	climateHeatingStatus
-	climateHeatingWindowFrontStatus
-	climateHeatingWindowRearStatus
-*/
+        $vpos = 120;
+        /*
+            climateHeatingStatus
+            climateHeatingWindowFrontStatus
+            climateHeatingWindowRearStatus
+        */
 
-		$vpos = 200;
+        $vpos = 200;
         $this->MaintainVariable('LastUpdate', $this->Translate('Last update'), VARIABLETYPE_INTEGER, '~UnixTimestamp', $vpos++, true);
-
 
         $username = $this->ReadPropertyString('username');
         $password = $this->ReadPropertyString('password');
@@ -112,10 +110,10 @@ class VWCarNet extends IPSModule
 
     public function GetConfigurationForm()
     {
-		$model_opts = [];
-		$model_opts[] = ['label' => 'Standard', 'value' => VW_MODEL_STANDARD];
-		$model_opts[] = ['label' => 'Hybrid', 'value' => VW_MODEL_HYBRID];
-		$model_opts[] = ['label' => 'Electric', 'value' => VW_MODEL_ELECTRIC];
+        $model_opts = [];
+        $model_opts[] = ['label' => 'Standard', 'value' => VW_MODEL_STANDARD];
+        $model_opts[] = ['label' => 'Hybrid', 'value' => VW_MODEL_HYBRID];
+        $model_opts[] = ['label' => 'Electric', 'value' => VW_MODEL_ELECTRIC];
 
         $formElements = [];
         $formElements[] = ['type' => 'Label', 'label' => 'Volkswagen Car-Net Account'];
@@ -124,7 +122,7 @@ class VWCarNet extends IPSModule
         $formElements[] = ['type' => 'Label', 'label' => ''];
         $formElements[] = ['type' => 'ValidationTextBox', 'name' => 'vin', 'caption' => 'VIN'];
         $formElements[] = ['type' => 'Label', 'label' => ''];
-		$formElements[] = ['type' => 'Select', 'name' => 'model', 'caption' => 'Model', 'options' => $model_opts];
+        $formElements[] = ['type' => 'Select', 'name' => 'model', 'caption' => 'Model', 'options' => $model_opts];
         $formElements[] = ['type' => 'Label', 'label' => 'Update data every X minutes'];
         $formElements[] = ['type' => 'IntervalBox', 'name' => 'update_interval', 'caption' => 'Minutes'];
 
@@ -173,10 +171,11 @@ class VWCarNet extends IPSModule
 
         $this->getClimater();
 
-		if ($model != VW_MODEL_STANDARD)
-			$this->getCharger();
+        if ($model != VW_MODEL_STANDARD) {
+            $this->getCharger();
+        }
 
-		$this->SetValue('LastUpdate', time());
+        $this->SetValue('LastUpdate', time());
     }
 
     public function TestAccess()
@@ -400,96 +399,97 @@ class VWCarNet extends IPSModule
         $cdata = '';
         $msg = '';
         $r = $this->do_ApiCall($func, $cdata, $msg);
-/*
-$r = true;
-$cdata = '{"StoredVehicleDataResponse":{"vin":"WVWZZZAAZHDxxxxxx","vehicleData":{"data": [{"id":"0x0101010001","field": [{"id":"0x0101010001","tsCarSentUtc":"2018-12-16T12:53:40Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:40Z","milCarCaptured":0,"milCarSent":0,"value":"echo"}]},{"id":"0x0101010002","field": [{"id":"0x0101010002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"8096"}]},{"id":"0x0203FFFFFF","field": [{"id":"0x0203010001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-1700","unit":"km"},{"id":"0x0203010002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-17","unit":"d"},{"id":"0x0203010003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-22000","unit":"km"},{"id":"0x0203010004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-29","unit":"d"},{"id":"0x0203010005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"1","textId":"interval.inspection.warn"},{"id":"0x0203010006","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"1","textId":"interval.inspection.warn"},{"id":"0x0203010007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"257","unit":"km"}]},{"id":"0x030101FFFF","field": [{"id":"0x0301010001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"status_parking_light_off"}]},{"id":"0x030102FFFF","field": [{"id":"0x0301020001","tsCarSentUtc":"2018-12-16T12:53:40Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:40Z","milCarCaptured":0,"milCarSent":0,"value":"2765","unit":"dK"}]},{"id":"0x030103FFFF","field": [{"id":"0x0301030001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"parking_brake_inactive"},{"id":"0x0301030002","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"30","unit":"%","textId":"soc_ok"},{"id":"0x0301030003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"%","textId":"bem_ok"},{"id":"0x0301030004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"km/h","textId":"speed_ok"},{"id":"0x0301030006","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"24","unit":"km","textId":"range_ok"},{"id":"0x0301030007","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"3","textId":"engine_type_electric"},{"id":"0x030103000A","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"100","unit":"%","textId":"fuel_level_ok"},{"id":"0x030103000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"fuel_level_measured"}]},{"id":"0x030104FFFF","field": [{"id":"0x0301040001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040006","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040008","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040009","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x030104000A","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x030104000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x030104000C","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x030104000D","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x030104000E","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x030104000F","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040010","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unlocked"},{"id":"0x0301040011","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040012","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"}]},{"id":"0x030105FFFF","field": [{"id":"0x0301050001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050009","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x030105000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"window_closed"},{"id":"0x030105000C","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"%"}]}]}}}';
-*/
+        /*
+        $r = true;
+        $cdata = '{"StoredVehicleDataResponse":{"vin":"WVWZZZAAZHDxxxxxx","vehicleData":{"data": [{"id":"0x0101010001","field": [{"id":"0x0101010001","tsCarSentUtc":"2018-12-16T12:53:40Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:40Z","milCarCaptured":0,"milCarSent":0,"value":"echo"}]},{"id":"0x0101010002","field": [{"id":"0x0101010002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"8096"}]},{"id":"0x0203FFFFFF","field": [{"id":"0x0203010001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-1700","unit":"km"},{"id":"0x0203010002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-17","unit":"d"},{"id":"0x0203010003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-22000","unit":"km"},{"id":"0x0203010004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-29","unit":"d"},{"id":"0x0203010005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"1","textId":"interval.inspection.warn"},{"id":"0x0203010006","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"1","textId":"interval.inspection.warn"},{"id":"0x0203010007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"257","unit":"km"}]},{"id":"0x030101FFFF","field": [{"id":"0x0301010001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"status_parking_light_off"}]},{"id":"0x030102FFFF","field": [{"id":"0x0301020001","tsCarSentUtc":"2018-12-16T12:53:40Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:40Z","milCarCaptured":0,"milCarSent":0,"value":"2765","unit":"dK"}]},{"id":"0x030103FFFF","field": [{"id":"0x0301030001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"parking_brake_inactive"},{"id":"0x0301030002","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"30","unit":"%","textId":"soc_ok"},{"id":"0x0301030003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"%","textId":"bem_ok"},{"id":"0x0301030004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"km/h","textId":"speed_ok"},{"id":"0x0301030006","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"24","unit":"km","textId":"range_ok"},{"id":"0x0301030007","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"3","textId":"engine_type_electric"},{"id":"0x030103000A","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"100","unit":"%","textId":"fuel_level_ok"},{"id":"0x030103000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"fuel_level_measured"}]},{"id":"0x030104FFFF","field": [{"id":"0x0301040001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040006","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040008","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040009","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x030104000A","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x030104000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x030104000C","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x030104000D","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x030104000E","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x030104000F","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040010","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unlocked"},{"id":"0x0301040011","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040012","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"}]},{"id":"0x030105FFFF","field": [{"id":"0x0301050001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050009","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x030105000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"window_closed"},{"id":"0x030105000C","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"%"}]}]}}}';
+        */
 
         if ($r) {
             $jdata = json_decode($cdata, true);
             $this->SendDebug(__FUNCTION__, 'jdata=' . print_r($jdata, true), 0);
 
-			$model = $this->ReadPropertyInteger('model');
-			$with_electric = $model != VW_MODEL_STANDARD;
+            $model = $this->ReadPropertyInteger('model');
+            $with_electric = $model != VW_MODEL_STANDARD;
 
-			$usedFields = [];
+            $usedFields = [];
 
             $mileage = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.1.field.0.value', 0);
-			$usedFields[1][0] = true;
-            $this->SendDebug(__FUNCTION__, utf8_decode('mileage=' . $mileage .  ' km'), 0);
-			$this->SetValue('Mileage', $mileage);
+            $usedFields[1][0] = true;
+            $this->SendDebug(__FUNCTION__, utf8_decode('mileage=' . $mileage . ' km'), 0);
+            $this->SetValue('Mileage', $mileage);
 
             $serviceInKm = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.2.field.2.value', 0);
-			$usedFields[2][2] = true;
+            $usedFields[2][2] = true;
             $serviceInKm *= -1;
-            $this->SendDebug(__FUNCTION__, utf8_decode('serviceInKm=' . $serviceInKm .  ' km'), 0);
-			$this->SetValue('ServiceInKm', $serviceInKm);
+            $this->SendDebug(__FUNCTION__, utf8_decode('serviceInKm=' . $serviceInKm . ' km'), 0);
+            $this->SetValue('ServiceInKm', $serviceInKm);
 
             $serviceInDays = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.2.field.3.value', 0);
-			$usedFields[2][3] = true;
+            $usedFields[2][3] = true;
             $serviceInDays *= -1;
-            $this->SendDebug(__FUNCTION__, utf8_decode('serviceInDays=' . $serviceInDays .  ' days'), 0);
-			$this->SetValue('ServiceInDays', $serviceInDays);
+            $this->SendDebug(__FUNCTION__, utf8_decode('serviceInDays=' . $serviceInDays . ' days'), 0);
+            $this->SetValue('ServiceInDays', $serviceInDays);
 
             $_serviceMessage = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.2.field.4.value', 0);
-			$usedFields[2][4] = true;
-			$serviceMessage = $this->decode_serviceMessage($_serviceMessage);
+            $usedFields[2][4] = true;
+            $serviceMessage = $this->decode_serviceMessage($_serviceMessage);
             $this->SendDebug(__FUNCTION__, utf8_decode('serviceMessage=' . $_serviceMessage . ' => ' . $serviceMessage), 0);
-			$this->SetValue('ServiceMessage', $serviceMessage);
+            $this->SetValue('ServiceMessage', $serviceMessage);
 
             $_parkingLight = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.3.field.0.value', 0);
-			$usedFields[3][0] = true;
-			$parkingLight = $this->decode_parkingLight($_parkingLight);
+            $usedFields[3][0] = true;
+            $parkingLight = $this->decode_parkingLight($_parkingLight);
             $this->SendDebug(__FUNCTION__, utf8_decode('parkingLight=' . $_parkingLight . ' => ' . $parkingLight), 0);
-			$this->SetValue('ParkingLight', $parkingLight);
+            $this->SetValue('ParkingLight', $parkingLight);
 
             $_parkingBrake = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.5.field.0.value', 0);
-			$usedFields[5][0] = true;
-			$parkingBrake = $this->decode_parkingBrake($_parkingBrake);
+            $usedFields[5][0] = true;
+            $parkingBrake = $this->decode_parkingBrake($_parkingBrake);
             $this->SendDebug(__FUNCTION__, utf8_decode('parkingBrake=' . $_parkingBrake . ' => ' . $parkingBrake), 0);
-			$this->SetValue('ParkingBreak', $parkingBrake);
+            $this->SetValue('ParkingBreak', $parkingBrake);
 
-			$_temperatureOutside = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.4.field.0.value', '');
-			$usedFields[4][0] = true;
-			if ($_temperatureOutside != '') {
-				$temperatureOutside = intval($_temperatureOutside) / 10.0 - 273;
-			} else {
-				$temperatureOutside = 0;
-			}
+            $_temperatureOutside = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.4.field.0.value', '');
+            $usedFields[4][0] = true;
+            if ($_temperatureOutside != '') {
+                $temperatureOutside = intval($_temperatureOutside) / 10.0 - 273;
+            } else {
+                $temperatureOutside = 0;
+            }
             $this->SendDebug(__FUNCTION__, utf8_decode('temperatureOutside=' . $_temperatureOutside . ' => ' . $temperatureOutside . ' °C'), 0);
-			$this->SetValue('TemperatureOutside', $temperatureOutside);
-		
-			if ($with_electric) {
-				$batteryLevel = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.5.field.1.value', 0);
-				$usedFields[5][1] = true;
-				$this->SendDebug(__FUNCTION__, utf8_decode('batteryLevel=' . $batteryLevel . ' %'), 0);
-				$this->SetValue('BatteryLevel', $batteryLevel);
-			}
+            $this->SetValue('TemperatureOutside', $temperatureOutside);
+
+            if ($with_electric) {
+                $batteryLevel = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.5.field.1.value', 0);
+                $usedFields[5][1] = true;
+                $this->SendDebug(__FUNCTION__, utf8_decode('batteryLevel=' . $batteryLevel . ' %'), 0);
+                $this->SetValue('BatteryLevel', $batteryLevel);
+            }
 
             $range = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.5.field.4.value', 0);
-			$usedFields[5][4] = true;
+            $usedFields[5][4] = true;
             $this->SendDebug(__FUNCTION__, utf8_decode('range=' . $range . ' km'), 0);
-			$this->SetValue('Range', $range);
+            $this->SetValue('Range', $range);
 
-			$driverDoorLockState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.0.value', 0);
-			$usedFields[6][0] = true;
-			$driverDoorCloseState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.1.value', 0);
-			$usedFields[6][1] = true;
-			$driverDoorState = $this->decode_doorState($driverDoorLockState, $driverDoorCloseState);
+            $driverDoorLockState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.0.value', 0);
+            $usedFields[6][0] = true;
+            $driverDoorCloseState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.1.value', 0);
+            $usedFields[6][1] = true;
+            $driverDoorState = $this->decode_doorState($driverDoorLockState, $driverDoorCloseState);
             $this->SendDebug(__FUNCTION__, utf8_decode('driverDoorState=' . $driverDoorLockState . '/' . $driverDoorCloseState . ' => ' . $driverDoorState), 0);
-			$this->SetValue('DriverDoorState', $driverDoorState);
-			
-			$_sunroofState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.7.field.5.value', 0);
-			$usedFields[7][5] = true;
-			$sunroofState = $this->decode_windowState($_sunroofState);
+            $this->SetValue('DriverDoorState', $driverDoorState);
+
+            $_sunroofState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.7.field.5.value', 0);
+            $usedFields[7][5] = true;
+            $sunroofState = $this->decode_windowState($_sunroofState);
             $this->SendDebug(__FUNCTION__, utf8_decode('sunroofState=' . $_sunroofState . ' => ' . $sunroofState), 0);
-			$this->SetValue('SunRoofState', $sunroofState);
+            $this->SetValue('SunRoofState', $sunroofState);
 
             $this->SendDebug(__FUNCTION__, utf8_decode('unused fields'), 0);
             for ($d = 0; $d < 10; $d++) {
                 for ($f = 0; $f < 99; $f++) {
-					if (isset($usedFields[$d][$f]))
-						continue;
+                    if (isset($usedFields[$d][$f])) {
+                        continue;
+                    }
 
                     $s = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.' . $d . '.field.' . $f . '.value', '');
                     if ($s != '') {
@@ -511,10 +511,10 @@ $cdata = '{"StoredVehicleDataResponse":{"vin":"WVWZZZAAZHDxxxxxx","vehicleData":
         $msg = '';
         $r = $this->do_ApiCall($func, $cdata, $msg);
 
-/*
-$r = true;
-$cdata = '{"findCarResponse":{"Position":{"timestampCarSent":"2018-12-16T13:28:28","timestampTssReceived":"2018-12-16T12:28:28Z","carCoordinate":{"latitude":48666325,"longitude":9233152},"timestampCarSentUTC":"2018-12-16T12:28:29Z","timestampCarCaptured":"2018-12-16T13:28:28"},"parkingTimeUTC":"2018-12-16T12:28:29Z"}}';
-*/
+        /*
+        $r = true;
+        $cdata = '{"findCarResponse":{"Position":{"timestampCarSent":"2018-12-16T13:28:28","timestampTssReceived":"2018-12-16T12:28:28Z","carCoordinate":{"latitude":48666325,"longitude":9233152},"timestampCarSentUTC":"2018-12-16T12:28:29Z","timestampCarCaptured":"2018-12-16T13:28:28"},"parkingTimeUTC":"2018-12-16T12:28:29Z"}}';
+        */
         if ($r) {
             $jdata = json_decode($cdata, true);
             $this->SendDebug(__FUNCTION__, 'jdata=' . print_r($jdata, true), 0);
@@ -532,18 +532,18 @@ $cdata = '{"findCarResponse":{"Position":{"timestampCarSent":"2018-12-16T13:28:2
                 $lon = 0;
             }
             $this->SendDebug(__FUNCTION__, utf8_decode('latitude=' . $_lat . ' => ' . $lat . ', longitude=' . $_lon . ' => ' . $lon), 0);
-			$this->SetValue('LastLatitude', $lat);
-			$this->SetValue('LastLongitude', $lon);
+            $this->SetValue('LastLatitude', $lat);
+            $this->SetValue('LastLongitude', $lon);
 
             $_positionTimestamp = $this->GetArrayElem($jdata, 'findCarResponse.Position.timestampCarSent', '');
             $positionTimestamp = strtotime($_positionTimestamp);
             $this->SendDebug(__FUNCTION__, utf8_decode('positionTimestamp=' . $_positionTimestamp . ' => ' . date('d.m.Y H:i', $positionTimestamp)), 0);
-			$this->SetValue('ParkingTimestamp', $positionTimestamp);
+            $this->SetValue('ParkingTimestamp', $positionTimestamp);
 
             $_parkingTimestamp = $this->GetArrayElem($jdata, 'findCarResponse.parkingTimeUTC', '');
             $parkingTimestamp = strtotime($_parkingTimestamp);
             $this->SendDebug(__FUNCTION__, utf8_decode('parkingTimestamp=' . $_parkingTimestamp . ' => ' . date('d.m.Y H:i', $parkingTimestamp)), 0);
-			$this->SetValue('PositionTimestamp', $parkingTimestamp);
+            $this->SetValue('PositionTimestamp', $parkingTimestamp);
         }
     }
 
@@ -626,113 +626,113 @@ $cdata = '{"findCarResponse":{"Position":{"timestampCarSent":"2018-12-16T13:28:2
         }
     }
 
-	private function decode_serviceMessage($serviceMessage)
-	{
-		switch ($serviceMessage) {
-			case 0:
-				$retval = $this->Translate('no message');
-				break;
-			case 1:
-				$retval = $this->Translate('warning');
-				break;
-			default:
-				$retval = $this->Translate('unknown value') . ' ' . $serviceMessage;
-				$this->SendDebug(__FUNCTION__, $retval, 0);
-				$this->LogMessage(__FUNCTION__ . ': ' . $retval, KL_WARNING);
-				break;
-		}
-		return $retval;
-	}
+    private function decode_serviceMessage($serviceMessage)
+    {
+        switch ($serviceMessage) {
+            case 0:
+                $retval = $this->Translate('no message');
+                break;
+            case 1:
+                $retval = $this->Translate('warning');
+                break;
+            default:
+                $retval = $this->Translate('unknown value') . ' ' . $serviceMessage;
+                $this->SendDebug(__FUNCTION__, $retval, 0);
+                $this->LogMessage(__FUNCTION__ . ': ' . $retval, KL_WARNING);
+                break;
+        }
+        return $retval;
+    }
 
-	private function decode_parkingBrake($parkingBrake)
-	{
-		switch ($parkingBrake) {
-			case 0:
-				$retval = $this->Translate('released');
-				break;
-			case 1:
-				$retval = $this->Translate('put on');
-				break;
-			default:
-				$retval = $this->Translate('unknown value') . ' ' . $parkingBrake;
-				$this->SendDebug(__FUNCTION__, $retval, 0);
-				$this->LogMessage(__FUNCTION__ . ': ' . $retval, KL_WARNING);
-				break;
-		}
-		return $retval;
-	}
+    private function decode_parkingBrake($parkingBrake)
+    {
+        switch ($parkingBrake) {
+            case 0:
+                $retval = $this->Translate('released');
+                break;
+            case 1:
+                $retval = $this->Translate('put on');
+                break;
+            default:
+                $retval = $this->Translate('unknown value') . ' ' . $parkingBrake;
+                $this->SendDebug(__FUNCTION__, $retval, 0);
+                $this->LogMessage(__FUNCTION__ . ': ' . $retval, KL_WARNING);
+                break;
+        }
+        return $retval;
+    }
 
-	private function decode_parkingLight($parkingLight)
-	{
-		switch ($parkingLight) {
-			case 2:
-				$retval = $this->Translate('left') . '=' . $this->Translate('off') . ', ' . $this->Translate('right') . '=' . $this->Translate('off');
-				break;
-			case 3:
-				$retval = $this->Translate('left') . '=' . $this->Translate('on') . ', ' . $this->Translate('right') . '=' . $this->Translate('off');
-				break;
-			case 4:
-				$retval = $this->Translate('left') . '=' . $this->Translate('off') . ', ' . $this->Translate('right') . '=' . $this->Translate('on');
-				break;
-			case 5:
-				$retval = $this->Translate('left') . '=' . $this->Translate('on') . ', ' . $this->Translate('right') . '=' . $this->Translate('on');
-				break;
-			default:
-				$retval = $this->Translate('unknown value') . ' ' . $parkingLight;
-				$this->SendDebug(__FUNCTION__, $retval, 0);
-				$this->LogMessage(__FUNCTION__ . ': ' . $retval, KL_WARNING);
-				break;
-		}
-		return $retval;
-	}
+    private function decode_parkingLight($parkingLight)
+    {
+        switch ($parkingLight) {
+            case 2:
+                $retval = $this->Translate('left') . '=' . $this->Translate('off') . ', ' . $this->Translate('right') . '=' . $this->Translate('off');
+                break;
+            case 3:
+                $retval = $this->Translate('left') . '=' . $this->Translate('on') . ', ' . $this->Translate('right') . '=' . $this->Translate('off');
+                break;
+            case 4:
+                $retval = $this->Translate('left') . '=' . $this->Translate('off') . ', ' . $this->Translate('right') . '=' . $this->Translate('on');
+                break;
+            case 5:
+                $retval = $this->Translate('left') . '=' . $this->Translate('on') . ', ' . $this->Translate('right') . '=' . $this->Translate('on');
+                break;
+            default:
+                $retval = $this->Translate('unknown value') . ' ' . $parkingLight;
+                $this->SendDebug(__FUNCTION__, $retval, 0);
+                $this->LogMessage(__FUNCTION__ . ': ' . $retval, KL_WARNING);
+                break;
+        }
+        return $retval;
+    }
 
-	private function decode_doorState($doorLockState, $doorCloseState)
-	{
-		switch ($doorLockState) {
-			case 2:
-				$lockState = $this->Translate('locked');
-				break;
-			case 3:
-				$lockState = $this->Translate('unlocked');
-				break;
-			default:
-				$lockState = $this->Translate('unknown value') . ' ' . $doorLockState;
-				$this->SendDebug(__FUNCTION__, $lockState, 0);
-				$this->LogMessage(__FUNCTION__ . ': ' . $lockState, KL_WARNING);
-				break;
-		}
-		switch ($doorCloseState) {
-			case 2:
-				$closeState = $this->Translate('opened');
-				break;
-			case 3:
-				$closeState = $this->Translate('closed');
-				break;
-			default:
-				$closeState = $this->Translate('unknown value') . ' ' . $doorCloseState;
-				$this->SendDebug(__FUNCTION__, $closeState, 0);
-				$this->LogMessage(__FUNCTION__ . ': ' . $closeState, KL_WARNING);
-				break;
-		}
-		$retval = $closeState . ' ' . $lockState;
-		return $retval;
-	}
+    private function decode_doorState($doorLockState, $doorCloseState)
+    {
+        switch ($doorLockState) {
+            case 2:
+                $lockState = $this->Translate('locked');
+                break;
+            case 3:
+                $lockState = $this->Translate('unlocked');
+                break;
+            default:
+                $lockState = $this->Translate('unknown value') . ' ' . $doorLockState;
+                $this->SendDebug(__FUNCTION__, $lockState, 0);
+                $this->LogMessage(__FUNCTION__ . ': ' . $lockState, KL_WARNING);
+                break;
+        }
+        switch ($doorCloseState) {
+            case 2:
+                $closeState = $this->Translate('opened');
+                break;
+            case 3:
+                $closeState = $this->Translate('closed');
+                break;
+            default:
+                $closeState = $this->Translate('unknown value') . ' ' . $doorCloseState;
+                $this->SendDebug(__FUNCTION__, $closeState, 0);
+                $this->LogMessage(__FUNCTION__ . ': ' . $closeState, KL_WARNING);
+                break;
+        }
+        $retval = $closeState . ' ' . $lockState;
+        return $retval;
+    }
 
-	private function decode_windowState($windowState)
-	{
-		switch ($windowState) {
-			case 2:
-				$retval = $this->Translate('opened');
-				break;
-			case 3:
-				$retval = $this->Translate('closed');
-				break;
-			default:
-				$retval = $this->Translate('unknown value') . ' ' . $windowState;
-				$this->SendDebug(__FUNCTION__, $retval, 0);
-				$this->LogMessage(__FUNCTION__ . ': ' . $retval, KL_WARNING);
-				break;
-		}
-		return $retval;
-	}
+    private function decode_windowState($windowState)
+    {
+        switch ($windowState) {
+            case 2:
+                $retval = $this->Translate('opened');
+                break;
+            case 3:
+                $retval = $this->Translate('closed');
+                break;
+            default:
+                $retval = $this->Translate('unknown value') . ' ' . $windowState;
+                $this->SendDebug(__FUNCTION__, $retval, 0);
+                $this->LogMessage(__FUNCTION__ . ': ' . $retval, KL_WARNING);
+                break;
+        }
+        return $retval;
+    }
 }
