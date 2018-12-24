@@ -13,6 +13,30 @@ if (!defined('VW_MODEL_ELECTRIC')) {
     define('VW_MODEL_ELECTRIC', 2);
 }
 
+/*
+
+if (!defined('VW_TEST_STATUS')) {
+    define('VW_TEST_STATUS', 
+        '{"StoredVehicleDataResponse":{"vin":"WVWZZZAAZHDxxxxxx","vehicleData":{"data": [{"id":"0x0101010001","field": [{"id":"0x0101010001","tsCarSentUtc":"2018-12-16T12:53:40Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:40Z","milCarCaptured":0,"milCarSent":0,"value":"echo"}]},{"id":"0x0101010002","field": [{"id":"0x0101010002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"8096"}]},{"id":"0x0203FFFFFF","field": [{"id":"0x0203010001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-1700","unit":"km"},{"id":"0x0203010002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-17","unit":"d"},{"id":"0x0203010003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-22000","unit":"km"},{"id":"0x0203010004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-29","unit":"d"},{"id":"0x0203010005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"1","textId":"interval.inspection.warn"},{"id":"0x0203010006","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"1","textId":"interval.inspection.warn"},{"id":"0x0203010007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"257","unit":"km"}]},{"id":"0x030101FFFF","field": [{"id":"0x0301010001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"status_parking_light_off"}]},{"id":"0x030102FFFF","field": [{"id":"0x0301020001","tsCarSentUtc":"2018-12-16T12:53:40Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:40Z","milCarCaptured":0,"milCarSent":0,"value":"2765","unit":"dK"}]},{"id":"0x030103FFFF","field": [{"id":"0x0301030001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"parking_brake_inactive"},{"id":"0x0301030002","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"30","unit":"%","textId":"soc_ok"},{"id":"0x0301030003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"%","textId":"bem_ok"},{"id":"0x0301030004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"km/h","textId":"speed_ok"},{"id":"0x0301030006","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"24","unit":"km","textId":"range_ok"},{"id":"0x0301030007","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"3","textId":"engine_type_electric"},{"id":"0x030103000A","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"100","unit":"%","textId":"fuel_level_ok"},{"id":"0x030103000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"fuel_level_measured"}]},{"id":"0x030104FFFF","field": [{"id":"0x0301040001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040006","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040008","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040009","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x030104000A","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x030104000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x030104000C","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x030104000D","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x030104000E","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x030104000F","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040010","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unlocked"},{"id":"0x0301040011","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040012","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"}]},{"id":"0x030105FFFF","field": [{"id":"0x0301050001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050009","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x030105000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"window_closed"},{"id":"0x030105000C","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"%"}]}]}}}'
+	);
+}
+
+if (!defined('VW_TEST_POSITION')) {
+    define('VW_TEST_POSITION', 
+		'{"findCarResponse":{"Position":{"timestampCarSent":"2018-12-16T13:28:28","timestampTssReceived":"2018-12-16T12:28:28Z","carCoordinate":{"latitude":48666325,"longitude":9233152},"timestampCarSentUTC":"2018-12-16T12:28:29Z","timestampCarCaptured":"2018-12-16T13:28:28"},"parkingTimeUTC":"2018-12-16T12:28:29Z"}}'
+	);
+}
+
+if (!defined('VW_TEST_CLIMATER')) {
+    define('VW_TEST_CLIMATER', '');
+}
+
+if (!defined('VW_TEST_CHARGER')) {
+    define('VW_TEST_CHARGER', '');
+}
+
+*/
+
 class VWCarNet extends IPSModule
 {
     use VWCarNetCommon;
@@ -401,12 +425,12 @@ class VWCarNet extends IPSModule
 
         $cdata = '';
         $msg = '';
-        $r = $this->do_ApiCall($func, $cdata, $msg);
-        /*
-        $r = true;
-        $cdata = '{"StoredVehicleDataResponse":{"vin":"WVWZZZAAZHDxxxxxx","vehicleData":{"data": [{"id":"0x0101010001","field": [{"id":"0x0101010001","tsCarSentUtc":"2018-12-16T12:53:40Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:40Z","milCarCaptured":0,"milCarSent":0,"value":"echo"}]},{"id":"0x0101010002","field": [{"id":"0x0101010002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"8096"}]},{"id":"0x0203FFFFFF","field": [{"id":"0x0203010001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-1700","unit":"km"},{"id":"0x0203010002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-17","unit":"d"},{"id":"0x0203010003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-22000","unit":"km"},{"id":"0x0203010004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-29","unit":"d"},{"id":"0x0203010005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"1","textId":"interval.inspection.warn"},{"id":"0x0203010006","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"1","textId":"interval.inspection.warn"},{"id":"0x0203010007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"257","unit":"km"}]},{"id":"0x030101FFFF","field": [{"id":"0x0301010001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"status_parking_light_off"}]},{"id":"0x030102FFFF","field": [{"id":"0x0301020001","tsCarSentUtc":"2018-12-16T12:53:40Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:40Z","milCarCaptured":0,"milCarSent":0,"value":"2765","unit":"dK"}]},{"id":"0x030103FFFF","field": [{"id":"0x0301030001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"parking_brake_inactive"},{"id":"0x0301030002","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"30","unit":"%","textId":"soc_ok"},{"id":"0x0301030003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"%","textId":"bem_ok"},{"id":"0x0301030004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"km/h","textId":"speed_ok"},{"id":"0x0301030006","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"24","unit":"km","textId":"range_ok"},{"id":"0x0301030007","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"3","textId":"engine_type_electric"},{"id":"0x030103000A","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"100","unit":"%","textId":"fuel_level_ok"},{"id":"0x030103000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"fuel_level_measured"}]},{"id":"0x030104FFFF","field": [{"id":"0x0301040001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040006","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040008","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040009","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x030104000A","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x030104000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x030104000C","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x030104000D","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x030104000E","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x030104000F","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040010","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unlocked"},{"id":"0x0301040011","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040012","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"}]},{"id":"0x030105FFFF","field": [{"id":"0x0301050001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050009","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x030105000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"window_closed"},{"id":"0x030105000C","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"%"}]}]}}}';
-        */
-
+		if (!defined('VW_TEST_STATUS')) {
+			$r = $this->do_ApiCall($func, $cdata, $msg);
+		} else {
+			$cdata = VW_TEST_STATUS;
+			$r = $cdata != '';
+        }
         if ($r) {
             $jdata = json_decode($cdata, true);
             $this->SendDebug(__FUNCTION__, 'jdata=' . print_r($jdata, true), 0);
@@ -477,30 +501,34 @@ class VWCarNet extends IPSModule
             $usedFields[6][0] = true;
             $driverDoorCloseState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.1.value', 0);
             $usedFields[6][1] = true;
+            $usedFields[6][2] = true; // ignorieren
             $driverDoor = $this->decode_doorState($driverDoorLockState, $driverDoorCloseState);
             $this->SendDebug(__FUNCTION__, utf8_decode('driverDoor=' . $driverDoorLockState . '/' . $driverDoorCloseState . ' => ' . $driverDoor), 0);
             $this->SetValue('DriverDoor', $driverDoor);
 
-            $frontPassengerDoorLockState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.2.value', 0);
-            $usedFields[6][2] = true;
-            $frontPassengerDoorCloseState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.3.value', 0);
+            $rearLeftDoorLockState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.3.value', 0);
             $usedFields[6][3] = true;
-            $frontPassengerDoor = $this->decode_doorState($frontPassengerDoorLockState, $frontPassengerDoorCloseState);
-            $this->SendDebug(__FUNCTION__, utf8_decode('frontPassengerDoor=' . $frontPassengerDoorLockState . '/' . $frontPassengerDoorCloseState . ' => ' . $frontPassengerDoor), 0);
-            $this->SetValue('FrontPassengerDoor', $frontPassengerDoor);
-
-            $rearLeftDoorLockState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.4.value', 0);
+            $rearLeftDoorCloseState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.4.value', 0);
             $usedFields[6][4] = true;
-            $rearLeftDoorCloseState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.5.value', 0);
-            $usedFields[6][5] = true;
+            $usedFields[6][5] = true; // ignorieren
             $rearLeftDoor = $this->decode_doorState($rearLeftDoorLockState, $rearLeftDoorCloseState);
             $this->SendDebug(__FUNCTION__, utf8_decode('rearLeftDoor=' . $rearLeftDoorLockState . '/' . $rearLeftDoorCloseState . ' => ' . $rearLeftDoor), 0);
             $this->SetValue('RearLeftDoor', $rearLeftDoor);
 
-            $rearRightDoorLockState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.6.value', 0);
+            $frontPassengerDoorLockState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.6.value', 0);
             $usedFields[6][6] = true;
-            $rearRightDoorCloseState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.7.value', 0);
+            $frontPassengerDoorCloseState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.7.value', 0);
             $usedFields[6][7] = true;
+            $usedFields[6][8] = true; // ignorieren
+            $frontPassengerDoor = $this->decode_doorState($frontPassengerDoorLockState, $frontPassengerDoorCloseState);
+            $this->SendDebug(__FUNCTION__, utf8_decode('frontPassengerDoor=' . $frontPassengerDoorLockState . '/' . $frontPassengerDoorCloseState . ' => ' . $frontPassengerDoor), 0);
+            $this->SetValue('FrontPassengerDoor', $frontPassengerDoor);
+
+            $rearRightDoorLockState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.9.value', 0);
+            $usedFields[6][9] = true;
+            $rearRightDoorCloseState = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.6.field.10.value', 0);
+            $usedFields[6][10] = true;
+            $usedFields[6][11] = true; // ignorieren
             $rearRightDoor = $this->decode_doorState($rearRightDoorLockState, $rearRightDoorCloseState);
             $this->SendDebug(__FUNCTION__, utf8_decode('rearRightDoor=' . $rearRightDoorLockState . '/' . $rearRightDoorCloseState . ' => ' . $rearRightDoor), 0);
             $this->SetValue('RearRightDoor', $rearRightDoor);
@@ -517,7 +545,6 @@ class VWCarNet extends IPSModule
                     if (isset($usedFields[$d][$f])) {
                         continue;
                     }
-
                     $s = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.' . $d . '.field.' . $f . '.value', '');
                     if ($s != '') {
                         $r = $this->GetArrayElem($jdata, 'StoredVehicleDataResponse.vehicleData.data.' . $d . '.field.' . $f . '.textId', '');
@@ -536,12 +563,12 @@ class VWCarNet extends IPSModule
 
         $cdata = '';
         $msg = '';
-        $r = $this->do_ApiCall($func, $cdata, $msg);
-
-        /*
-        $r = true;
-        $cdata = '{"findCarResponse":{"Position":{"timestampCarSent":"2018-12-16T13:28:28","timestampTssReceived":"2018-12-16T12:28:28Z","carCoordinate":{"latitude":48666325,"longitude":9233152},"timestampCarSentUTC":"2018-12-16T12:28:29Z","timestampCarCaptured":"2018-12-16T13:28:28"},"parkingTimeUTC":"2018-12-16T12:28:29Z"}}';
-        */
+		if (!defined('VW_TEST_POSITION')) {
+			$r = $this->do_ApiCall($func, $cdata, $msg);
+		} else {
+			$cdata = VW_TEST_POSITION;
+			$r = $cdata != '';
+        }
         if ($r) {
             $jdata = json_decode($cdata, true);
             $this->SendDebug(__FUNCTION__, 'jdata=' . print_r($jdata, true), 0);
@@ -581,7 +608,12 @@ class VWCarNet extends IPSModule
 
         $cdata = '';
         $msg = '';
-        $r = $this->do_ApiCall($func, $cdata, $msg);
+		if (!defined('VW_TEST_CLIMATER')) {
+			$r = $this->do_ApiCall($func, $cdata, $msg);
+		} else {
+			$cdata = VW_TEST_CLIMATER;
+			$r = $cdata != '';
+        }
         if ($r) {
             $jdata = json_decode($cdata, true);
             $this->SendDebug(__FUNCTION__, 'jdata=' . print_r($jdata, true), 0);
@@ -612,7 +644,12 @@ class VWCarNet extends IPSModule
 
         $cdata = '';
         $msg = '';
-        $r = $this->do_ApiCall($func, $cdata, $msg);
+		if (!defined('VW_TEST_CHARGER')) {
+			$r = $this->do_ApiCall($func, $cdata, $msg);
+		} else {
+			$cdata = VW_TEST_CHARGER;
+			$r = $cdata != '';
+        }
         if ($r) {
             $jdata = json_decode($cdata, true);
             $this->SendDebug(__FUNCTION__, 'jdata=' . print_r($jdata, true), 0);
