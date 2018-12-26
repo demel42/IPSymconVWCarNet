@@ -2,18 +2,50 @@
 
 require_once __DIR__ . '/../libs/common.php';  // globale Funktionen
 
-// Model
 if (!defined('VW_MODEL_STANDARD')) {
     define('VW_MODEL_STANDARD', 0);
-}
-if (!defined('VW_MODEL_HYBRID')) {
     define('VW_MODEL_HYBRID', 1);
-}
-if (!defined('VW_MODEL_ELECTRIC')) {
     define('VW_MODEL_ELECTRIC', 2);
 }
 
-/*
+if (!defined('VW_PARKINGLIGHT_UNKNOWN')) {
+	define('VW_PARKINGLIGHT_UNKNOWN', -1);
+	define('VW_PARKINGLIGHT_OFF', 2);
+	define('VW_PARKINGLIGHT_LEFT', 3);
+	define('VW_PARKINGLIGHT_RIGHT', 4);
+	define('VW_PARKINGLIGHT_BOTH', 5);
+}
+
+if (!defined('VW_PARKINGBREAK_UNKNOWN')) {
+	define('VW_PARKINGBREAK_UNKNOWN', -1);
+	define('VW_PARKINGBREAK_RELEASED', 0);
+	define('VW_PARKINGBREAK_TIGHTENED', 1);
+}
+
+if (!defined('VW_SERVICEMESSAGE_UNKNOWN')) {
+	define('VW_SERVICEMESSAGE_UNKNOWN', -1);
+	define('VW_SERVICEMESSAGE_NONE', 0);
+	define('VW_SERVICEMESSAGE_WARNING', 1);
+}
+
+if (!defined('VW_DOORSTATE_UNKNOWN')) {
+	define('VW_DOORSTATE_UNKNOWN', -1);
+	define('VW_DOORSTATE_UNSUPPORTED', 0);
+	define('VW_DOORSTATE_OPENED', 2);
+	define('VW_DOORSTATE_CLOSED', 3);
+	define('VW_DOORSTATE_LOCKED', 4);
+}
+
+if (!defined('VW_WINDOWSTATE_UNKNOWN')) {
+	define('VW_WINDOWSTATE_UNKNOWN', -1);
+	define('VW_WINDOWSTATE_UNSUPPORTED', 0);
+	define('VW_WINDOWSTATE_OPENED', 2);
+	define('VW_WINDOWSTATE_CLOSED', 3);
+}
+
+define('VW_TEST', false);
+
+if (VW_TEST) {
 
 if (!defined('VW_TEST_STATUS')) {
     define('VW_TEST_STATUS',
@@ -35,7 +67,7 @@ if (!defined('VW_TEST_CHARGER')) {
     define('VW_TEST_CHARGER', '');
 }
 
-*/
+}
 
 class VWCarNet extends IPSModule
 {
@@ -61,6 +93,41 @@ class VWCarNet extends IPSModule
         $this->CreateVarProfile('VWCarNet.Location', VARIABLETYPE_FLOAT, ' °', 0, 0, 0, 5, '');
         $this->CreateVarProfile('VWCarNet.Temperature', VARIABLETYPE_FLOAT, ' °C', 0, 0, 0, 0, '');
         $this->CreateVarProfile('VWCarNet.BatteryLevel', VARIABLETYPE_FLOAT, ' %', 0, 0, 0, 0, '');
+
+		$associations = [];
+		$associations[] = ['Wert' => VW_PARKINGLIGHT_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1];
+		$associations[] = ['Wert' => VW_PARKINGLIGHT_OFF, 'Name' => $this->Translate('off'), 'Farbe' => -1];
+		$associations[] = ['Wert' => VW_PARKINGLIGHT_LEFT, 'Name' => $this->Translate('left side on'), 'Farbe' => -1];
+		$associations[] = ['Wert' => VW_PARKINGLIGHT_RIGHT, 'Name' => $this->Translate('right side on'), 'Farbe' => -1];
+		$associations[] = ['Wert' => VW_PARKINGLIGHT_BOTH, 'Name' => $this->Translate('both side on'), 'Farbe' => -1];
+		$this->CreateVarProfile('VWCarNet.ParkingLight', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
+
+		$associations = [];
+		$associations[] = ['Wert' => VW_PARKINGBREAK_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1];
+		$associations[] = ['Wert' => VW_PARKINGBREAK_RELEASED, 'Name' => $this->Translate('released'), 'Farbe' => -1];
+		$associations[] = ['Wert' => VW_PARKINGBREAK_TIGHTENED, 'Name' => $this->Translate('tightened'), 'Farbe' => -1];
+		$this->CreateVarProfile('VWCarNet.ParkingBreak', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
+
+		$associations = [];
+		$associations[] = ['Wert' => VW_SERVICEMESSAGE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1];
+		$associations[] = ['Wert' => VW_SERVICEMESSAGE_NONE, 'Name' => $this->Translate('no message'), 'Farbe' => -1];
+		$associations[] = ['Wert' => VW_SERVICEMESSAGE_WARNING, 'Name' => $this->Translate('warning'), 'Farbe' => -1];
+		$this->CreateVarProfile('VWCarNet.ServiceMessage', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
+
+		$associations = [];
+		$associations[] = ['Wert' => VW_DOORSTATE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1];
+		$associations[] = ['Wert' => VW_DOORSTATE_UNSUPPORTED, 'Name' => $this->Translate('unsupported'), 'Farbe' => -1];
+		$associations[] = ['Wert' => VW_DOORSTATE_OPENED, 'Name' => $this->Translate('opened'), 'Farbe' => -1];
+		$associations[] = ['Wert' => VW_DOORSTATE_CLOSED, 'Name' => $this->Translate('closed'), 'Farbe' => -1];
+		$associations[] = ['Wert' => VW_DOORSTATE_LOCKED, 'Name' => $this->Translate('locked'), 'Farbe' => -1];
+		$this->CreateVarProfile('VWCarNet.DoorState', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
+
+		$associations = [];
+		$associations[] = ['Wert' => VW_WINDOWSTATE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1];
+		$associations[] = ['Wert' => VW_WINDOWSTATE_UNSUPPORTED, 'Name' => $this->Translate('unsupported'), 'Farbe' => -1];
+		$associations[] = ['Wert' => VW_WINDOWSTATE_OPENED, 'Name' => $this->Translate('opened'), 'Farbe' => -1];
+		$associations[] = ['Wert' => VW_WINDOWSTATE_CLOSED, 'Name' => $this->Translate('closed'), 'Farbe' => -1];
+		$this->CreateVarProfile('VWCarNet.WindowState', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
     }
 
     public function ApplyChanges()
@@ -77,17 +144,17 @@ class VWCarNet extends IPSModule
         $this->MaintainVariable('BatteryLevel', $this->Translate('Battery level'), VARIABLETYPE_FLOAT, 'VWCarNet.BatteryLevel', $vpos++, $with_electric);
 
         $vpos = 50;
-        $this->MaintainVariable('DriverDoor', $this->Translate('Driver door'), VARIABLETYPE_STRING, '', $vpos++, true);
-        $this->MaintainVariable('FrontPassengerDoor', $this->Translate('Front passenger door'), VARIABLETYPE_STRING, '', $vpos++, true);
-        $this->MaintainVariable('RearLeftDoor', $this->Translate('Rear left door'), VARIABLETYPE_STRING, '', $vpos++, true);
-        $this->MaintainVariable('RearRightDoor', $this->Translate('Rear right door'), VARIABLETYPE_STRING, '', $vpos++, true);
+        $this->MaintainVariable('DriverDoor', $this->Translate('Driver door'), VARIABLETYPE_INTEGER, 'VWCarNet.DoorState', $vpos++, true);
+        $this->MaintainVariable('FrontPassengerDoor', $this->Translate('Front passenger door'), VARIABLETYPE_INTEGER, 'VWCarNet.DoorState', $vpos++, true);
+        $this->MaintainVariable('RearLeftDoor', $this->Translate('Rear left door'), VARIABLETYPE_INTEGER, 'VWCarNet.DoorState', $vpos++, true);
+        $this->MaintainVariable('RearRightDoor', $this->Translate('Rear right door'), VARIABLETYPE_INTEGER, 'VWCarNet.DoorState', $vpos++, true);
 
         $vpos = 60;
-        $this->MaintainVariable('SunRoof', $this->Translate('Sunroof'), VARIABLETYPE_STRING, '', $vpos++, true);
+        $this->MaintainVariable('SunRoof', $this->Translate('Sunroof'), VARIABLETYPE_INTEGER, 'VWCarNet.WindowState', $vpos++, true);
 
         $vpos = 70;
-        $this->MaintainVariable('ParkingLight', $this->Translate('Parking light'), VARIABLETYPE_STRING, '', $vpos++, true);
-        $this->MaintainVariable('ParkingBreak', $this->Translate('Parking break'), VARIABLETYPE_STRING, '', $vpos++, true);
+        $this->MaintainVariable('ParkingLight', $this->Translate('Parking light'), VARIABLETYPE_INTEGER, 'VWCarNet.ParkingLight', $vpos++, true);
+        $this->MaintainVariable('ParkingBreak', $this->Translate('Parking break'), VARIABLETYPE_INTEGER, 'VWCarNet.ParkingBreak', $vpos++, true);
 
         $this->MaintainVariable('TemperatureOutside', $this->Translate('Temperature outside'), VARIABLETYPE_FLOAT, 'VWCarNet.Temperature', $vpos++, true);
 
@@ -100,7 +167,7 @@ class VWCarNet extends IPSModule
         $vpos = 90;
         $this->MaintainVariable('ServiceInKm', $this->Translate('Service in'), VARIABLETYPE_INTEGER, 'VWCarNet.Mileage', $vpos++, true);
         $this->MaintainVariable('ServiceInDays', $this->Translate('Service in'), VARIABLETYPE_INTEGER, 'VWCarNet.Days', $vpos++, true);
-        $this->MaintainVariable('ServiceMessage', $this->Translate('Service message'), VARIABLETYPE_STRING, '', $vpos++, true);
+        $this->MaintainVariable('ServiceMessage', $this->Translate('Service message'), VARIABLETYPE_INTEGER, 'VWCarNet.ServiceMessage', $vpos++, true);
 
         $vpos = 100;
         /*
@@ -694,15 +761,16 @@ class VWCarNet extends IPSModule
     {
         switch ($serviceMessage) {
             case 0:
-                $retval = $this->Translate('no message');
+				$retval = VW_SERVICEMESSAGE_NONE;
                 break;
             case 1:
-                $retval = $this->Translate('warning');
+				$retval = VW_SERVICEMESSAGE_WARNING;
                 break;
             default:
-                $retval = $this->Translate('unknown value') . ' ' . $serviceMessage;
-                $this->SendDebug(__FUNCTION__, $retval, 0);
-                $this->LogMessage(__FUNCTION__ . ': ' . $retval, KL_WARNING);
+				$retval = VW_SERVICEMESSAGE_UNKNOWN;
+                $e = 'unknown value ' . $serviceMessage;
+                $this->SendDebug(__FUNCTION__, $e, 0);
+                $this->LogMessage(__FUNCTION__ . ': ' . $e, KL_WARNING);
                 break;
         }
         return $retval;
@@ -712,15 +780,16 @@ class VWCarNet extends IPSModule
     {
         switch ($parkingBrake) {
             case 0:
-                $retval = $this->Translate('released');
+				$retval = VW_PARKINGBREAK_RELEASED;
                 break;
             case 1:
-                $retval = $this->Translate('put on');
+				$retval = VW_PARKINGBREAK_TIGHTENED;
                 break;
             default:
-                $retval = $this->Translate('unknown value') . ' ' . $parkingBrake;
-                $this->SendDebug(__FUNCTION__, $retval, 0);
-                $this->LogMessage(__FUNCTION__ . ': ' . $retval, KL_WARNING);
+                $retval = VW_PARKINGBREAK_UNKNOWN;
+                $e = 'unknown value ' . $parkingBrake;
+                $this->SendDebug(__FUNCTION__, $e, 0);
+                $this->LogMessage(__FUNCTION__ . ': ' . $e, KL_WARNING);
                 break;
         }
         return $retval;
@@ -730,21 +799,22 @@ class VWCarNet extends IPSModule
     {
         switch ($parkingLight) {
             case 2:
-                $retval = $this->Translate('left') . '=' . $this->Translate('off') . ', ' . $this->Translate('right') . '=' . $this->Translate('off');
+                $retval = VW_PARKINGLIGHT_OFF;
                 break;
             case 3:
-                $retval = $this->Translate('left') . '=' . $this->Translate('on') . ', ' . $this->Translate('right') . '=' . $this->Translate('off');
+                $retval = VW_PARKINGLIGHT_LEFT;
                 break;
             case 4:
-                $retval = $this->Translate('left') . '=' . $this->Translate('off') . ', ' . $this->Translate('right') . '=' . $this->Translate('on');
+                $retval = VW_PARKINGLIGHT_RIGHT;
                 break;
             case 5:
-                $retval = $this->Translate('left') . '=' . $this->Translate('on') . ', ' . $this->Translate('right') . '=' . $this->Translate('on');
+                $retval = VW_PARKINGLIGHT_BOTH;
                 break;
             default:
-                $retval = $this->Translate('unknown value') . ' ' . $parkingLight;
-                $this->SendDebug(__FUNCTION__, $retval, 0);
-                $this->LogMessage(__FUNCTION__ . ': ' . $retval, KL_WARNING);
+				$retval = VW_PARKINGLIGHT_UNKNOWN;
+                $e = 'unknown value ' . $parkingLight;
+                $this->SendDebug(__FUNCTION__, $e, 0);
+                $this->LogMessage(__FUNCTION__ . ': ' . $e, KL_WARNING);
                 break;
         }
         return $retval;
@@ -752,39 +822,23 @@ class VWCarNet extends IPSModule
 
     private function decode_doorState($doorLockState, $doorCloseState)
     {
-        switch ($doorLockState) {
-            case 0:
-                $retval = $this->Translate('unsupported');
-                break;
-            case 2:
-                $lockState = $this->Translate('locked');
-                break;
-            case 3:
-                $lockState = $this->Translate('unlocked');
-                break;
-            default:
-                $lockState = $this->Translate('unknown value') . ' ' . $doorLockState;
-                $this->SendDebug(__FUNCTION__, $lockState, 0);
-                $this->LogMessage(__FUNCTION__ . ': ' . $lockState, KL_WARNING);
-                break;
+		$retval = VW_DOORSTATE_UNKNOWN;
+
+		if ($doorLockState == 0 || $doorCloseState == 0) {
+			$retval = VW_DOORSTATE_UNSUPPORTED;
+		} else if ($doorLockState == 2) {
+			$retval = VW_DOORSTATE_LOCKED;
+		} else if (doorCloseState == 3) {
+			$retval = VW_DOORSTATE_CLOSED;
+		} else if (doorCloseState == 2) {
+			$retval = VW_DOORSTATE_OPENED;
+		}
+
+		if ($retval == VW_DOORSTATE_UNKNOWN) {
+			$e = 'unknown value ' . $doorLockState . '/' . $doorCloseState;
+			$this->SendDebug(__FUNCTION__, $e, 0);
+			$this->LogMessage(__FUNCTION__ . ': ' . $e, KL_WARNING);
         }
-        switch ($doorCloseState) {
-            case 0:
-                $retval = $this->Translate('unsupported');
-                break;
-            case 2:
-                $closeState = $this->Translate('opened');
-                break;
-            case 3:
-                $closeState = $this->Translate('closed');
-                break;
-            default:
-                $closeState = $this->Translate('unknown value') . ' ' . $doorCloseState;
-                $this->SendDebug(__FUNCTION__, $closeState, 0);
-                $this->LogMessage(__FUNCTION__ . ': ' . $closeState, KL_WARNING);
-                break;
-        }
-        $retval = $closeState . ' ' . $lockState;
         return $retval;
     }
 
@@ -792,18 +846,19 @@ class VWCarNet extends IPSModule
     {
         switch ($windowState) {
             case 0:
-                $retval = $this->Translate('unsupported');
+                $retval = VW_WINDOWSTATE_UNSUPPORTED;
                 break;
             case 2:
-                $retval = $this->Translate('opened');
+                $retval = VW_WINDOWSTATE_OPENED;
                 break;
             case 3:
-                $retval = $this->Translate('closed');
+                $retval = VW_WINDOWSTATE_CLOSED;
                 break;
             default:
-                $retval = $this->Translate('unknown value') . ' ' . $windowState;
-                $this->SendDebug(__FUNCTION__, $retval, 0);
-                $this->LogMessage(__FUNCTION__ . ': ' . $retval, KL_WARNING);
+                $retval = VW_WINDOWSTATE_UNKNOWN;
+				$e = 'unknown value ' . $windowState;
+                $this->SendDebug(__FUNCTION__, $e, 0);
+                $this->LogMessage(__FUNCTION__ . ': ' . $e, KL_WARNING);
                 break;
         }
         return $retval;
