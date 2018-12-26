@@ -9,64 +9,62 @@ if (!defined('VW_MODEL_STANDARD')) {
 }
 
 if (!defined('VW_PARKINGLIGHT_UNKNOWN')) {
-	define('VW_PARKINGLIGHT_UNKNOWN', -1);
-	define('VW_PARKINGLIGHT_OFF', 2);
-	define('VW_PARKINGLIGHT_LEFT', 3);
-	define('VW_PARKINGLIGHT_RIGHT', 4);
-	define('VW_PARKINGLIGHT_BOTH', 5);
+    define('VW_PARKINGLIGHT_UNKNOWN', -1);
+    define('VW_PARKINGLIGHT_OFF', 2);
+    define('VW_PARKINGLIGHT_LEFT', 3);
+    define('VW_PARKINGLIGHT_RIGHT', 4);
+    define('VW_PARKINGLIGHT_BOTH', 5);
 }
 
 if (!defined('VW_PARKINGBREAK_UNKNOWN')) {
-	define('VW_PARKINGBREAK_UNKNOWN', -1);
-	define('VW_PARKINGBREAK_RELEASED', 0);
-	define('VW_PARKINGBREAK_TIGHTENED', 1);
+    define('VW_PARKINGBREAK_UNKNOWN', -1);
+    define('VW_PARKINGBREAK_RELEASED', 0);
+    define('VW_PARKINGBREAK_TIGHTENED', 1);
 }
 
 if (!defined('VW_SERVICEMESSAGE_UNKNOWN')) {
-	define('VW_SERVICEMESSAGE_UNKNOWN', -1);
-	define('VW_SERVICEMESSAGE_NONE', 0);
-	define('VW_SERVICEMESSAGE_WARNING', 1);
+    define('VW_SERVICEMESSAGE_UNKNOWN', -1);
+    define('VW_SERVICEMESSAGE_NONE', 0);
+    define('VW_SERVICEMESSAGE_WARNING', 1);
 }
 
 if (!defined('VW_DOORSTATE_UNKNOWN')) {
-	define('VW_DOORSTATE_UNKNOWN', -1);
-	define('VW_DOORSTATE_UNSUPPORTED', 0);
-	define('VW_DOORSTATE_OPENED', 2);
-	define('VW_DOORSTATE_CLOSED', 3);
-	define('VW_DOORSTATE_LOCKED', 4);
+    define('VW_DOORSTATE_UNKNOWN', -1);
+    define('VW_DOORSTATE_UNSUPPORTED', 0);
+    define('VW_DOORSTATE_OPENED', 2);
+    define('VW_DOORSTATE_CLOSED', 3);
+    define('VW_DOORSTATE_LOCKED', 4);
 }
 
 if (!defined('VW_WINDOWSTATE_UNKNOWN')) {
-	define('VW_WINDOWSTATE_UNKNOWN', -1);
-	define('VW_WINDOWSTATE_UNSUPPORTED', 0);
-	define('VW_WINDOWSTATE_OPENED', 2);
-	define('VW_WINDOWSTATE_CLOSED', 3);
+    define('VW_WINDOWSTATE_UNKNOWN', -1);
+    define('VW_WINDOWSTATE_UNSUPPORTED', 0);
+    define('VW_WINDOWSTATE_OPENED', 2);
+    define('VW_WINDOWSTATE_CLOSED', 3);
 }
 
 define('VW_TEST', false);
 
 if (VW_TEST) {
-
-if (!defined('VW_TEST_STATUS')) {
-    define('VW_TEST_STATUS',
+    if (!defined('VW_TEST_STATUS')) {
+        define('VW_TEST_STATUS',
         '{"StoredVehicleDataResponse":{"vin":"WVWZZZAAZHDxxxxxx","vehicleData":{"data": [{"id":"0x0101010001","field": [{"id":"0x0101010001","tsCarSentUtc":"2018-12-16T12:53:40Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:40Z","milCarCaptured":0,"milCarSent":0,"value":"echo"}]},{"id":"0x0101010002","field": [{"id":"0x0101010002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"8096"}]},{"id":"0x0203FFFFFF","field": [{"id":"0x0203010001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-1700","unit":"km"},{"id":"0x0203010002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-17","unit":"d"},{"id":"0x0203010003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-22000","unit":"km"},{"id":"0x0203010004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"-29","unit":"d"},{"id":"0x0203010005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"1","textId":"interval.inspection.warn"},{"id":"0x0203010006","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"1","textId":"interval.inspection.warn"},{"id":"0x0203010007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T12:28:29","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"257","unit":"km"}]},{"id":"0x030101FFFF","field": [{"id":"0x0301010001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"status_parking_light_off"}]},{"id":"0x030102FFFF","field": [{"id":"0x0301020001","tsCarSentUtc":"2018-12-16T12:53:40Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:40Z","milCarCaptured":0,"milCarSent":0,"value":"2765","unit":"dK"}]},{"id":"0x030103FFFF","field": [{"id":"0x0301030001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"parking_brake_inactive"},{"id":"0x0301030002","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"30","unit":"%","textId":"soc_ok"},{"id":"0x0301030003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"%","textId":"bem_ok"},{"id":"0x0301030004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"km/h","textId":"speed_ok"},{"id":"0x0301030006","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"24","unit":"km","textId":"range_ok"},{"id":"0x0301030007","tsCarSentUtc":"2018-12-16T12:53:39Z","tsCarSent":"2000-01-01T00:00:00","tsCarCaptured":"2000-01-01T00:00:00","tsTssReceivedUtc":"2018-12-16T12:53:39Z","milCarCaptured":0,"milCarSent":0,"value":"3","textId":"engine_type_electric"},{"id":"0x030103000A","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"100","unit":"%","textId":"fuel_level_ok"},{"id":"0x030103000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"fuel_level_measured"}]},{"id":"0x030104FFFF","field": [{"id":"0x0301040001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040002","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040004","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040006","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x0301040008","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040009","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x030104000A","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x030104000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x030104000C","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x030104000D","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"2","textId":"door_locked"},{"id":"0x030104000E","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x030104000F","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"},{"id":"0x0301040010","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unlocked"},{"id":"0x0301040011","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_closed"},{"id":"0x0301040012","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"door_unsafe"}]},{"id":"0x030105FFFF","field": [{"id":"0x0301050001","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050003","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050005","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050007","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x0301050009","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","textId":"window_unsupported"},{"id":"0x030105000B","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"3","textId":"window_closed"},{"id":"0x030105000C","tsCarSentUtc":"2018-12-16T12:28:29Z","tsCarSent":"2018-12-16T13:28:28","tsCarCaptured":"2018-12-16T13:28:28","tsTssReceivedUtc":"2018-12-16T12:28:28Z","milCarCaptured":8096,"milCarSent":8096,"value":"0","unit":"%"}]}]}}}'
     );
-}
+    }
 
-if (!defined('VW_TEST_POSITION')) {
-    define('VW_TEST_POSITION',
+    if (!defined('VW_TEST_POSITION')) {
+        define('VW_TEST_POSITION',
         '{"findCarResponse":{"Position":{"timestampCarSent":"2018-12-16T13:28:28","timestampTssReceived":"2018-12-16T12:28:28Z","carCoordinate":{"latitude":48666325,"longitude":9233152},"timestampCarSentUTC":"2018-12-16T12:28:29Z","timestampCarCaptured":"2018-12-16T13:28:28"},"parkingTimeUTC":"2018-12-16T12:28:29Z"}}'
     );
-}
+    }
 
-if (!defined('VW_TEST_CLIMATER')) {
-    define('VW_TEST_CLIMATER', '');
-}
+    if (!defined('VW_TEST_CLIMATER')) {
+        define('VW_TEST_CLIMATER', '');
+    }
 
-if (!defined('VW_TEST_CHARGER')) {
-    define('VW_TEST_CHARGER', '');
-}
-
+    if (!defined('VW_TEST_CHARGER')) {
+        define('VW_TEST_CHARGER', '');
+    }
 }
 
 class VWCarNet extends IPSModule
@@ -94,40 +92,40 @@ class VWCarNet extends IPSModule
         $this->CreateVarProfile('VWCarNet.Temperature', VARIABLETYPE_FLOAT, ' °C', 0, 0, 0, 0, '');
         $this->CreateVarProfile('VWCarNet.BatteryLevel', VARIABLETYPE_FLOAT, ' %', 0, 0, 0, 0, '');
 
-		$associations = [];
-		$associations[] = ['Wert' => VW_PARKINGLIGHT_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1];
-		$associations[] = ['Wert' => VW_PARKINGLIGHT_OFF, 'Name' => $this->Translate('off'), 'Farbe' => -1];
-		$associations[] = ['Wert' => VW_PARKINGLIGHT_LEFT, 'Name' => $this->Translate('left side on'), 'Farbe' => -1];
-		$associations[] = ['Wert' => VW_PARKINGLIGHT_RIGHT, 'Name' => $this->Translate('right side on'), 'Farbe' => -1];
-		$associations[] = ['Wert' => VW_PARKINGLIGHT_BOTH, 'Name' => $this->Translate('both side on'), 'Farbe' => -1];
-		$this->CreateVarProfile('VWCarNet.ParkingLight', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
+        $associations = [];
+        $associations[] = ['Wert' => VW_PARKINGLIGHT_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1];
+        $associations[] = ['Wert' => VW_PARKINGLIGHT_OFF, 'Name' => $this->Translate('off'), 'Farbe' => -1];
+        $associations[] = ['Wert' => VW_PARKINGLIGHT_LEFT, 'Name' => $this->Translate('left side on'), 'Farbe' => -1];
+        $associations[] = ['Wert' => VW_PARKINGLIGHT_RIGHT, 'Name' => $this->Translate('right side on'), 'Farbe' => -1];
+        $associations[] = ['Wert' => VW_PARKINGLIGHT_BOTH, 'Name' => $this->Translate('both side on'), 'Farbe' => -1];
+        $this->CreateVarProfile('VWCarNet.ParkingLight', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
 
-		$associations = [];
-		$associations[] = ['Wert' => VW_PARKINGBREAK_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1];
-		$associations[] = ['Wert' => VW_PARKINGBREAK_RELEASED, 'Name' => $this->Translate('released'), 'Farbe' => -1];
-		$associations[] = ['Wert' => VW_PARKINGBREAK_TIGHTENED, 'Name' => $this->Translate('tightened'), 'Farbe' => -1];
-		$this->CreateVarProfile('VWCarNet.ParkingBreak', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
+        $associations = [];
+        $associations[] = ['Wert' => VW_PARKINGBREAK_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1];
+        $associations[] = ['Wert' => VW_PARKINGBREAK_RELEASED, 'Name' => $this->Translate('released'), 'Farbe' => -1];
+        $associations[] = ['Wert' => VW_PARKINGBREAK_TIGHTENED, 'Name' => $this->Translate('tightened'), 'Farbe' => -1];
+        $this->CreateVarProfile('VWCarNet.ParkingBreak', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
 
-		$associations = [];
-		$associations[] = ['Wert' => VW_SERVICEMESSAGE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1];
-		$associations[] = ['Wert' => VW_SERVICEMESSAGE_NONE, 'Name' => $this->Translate('no message'), 'Farbe' => -1];
-		$associations[] = ['Wert' => VW_SERVICEMESSAGE_WARNING, 'Name' => $this->Translate('warning'), 'Farbe' => -1];
-		$this->CreateVarProfile('VWCarNet.ServiceMessage', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
+        $associations = [];
+        $associations[] = ['Wert' => VW_SERVICEMESSAGE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1];
+        $associations[] = ['Wert' => VW_SERVICEMESSAGE_NONE, 'Name' => $this->Translate('no message'), 'Farbe' => -1];
+        $associations[] = ['Wert' => VW_SERVICEMESSAGE_WARNING, 'Name' => $this->Translate('warning'), 'Farbe' => -1];
+        $this->CreateVarProfile('VWCarNet.ServiceMessage', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
 
-		$associations = [];
-		$associations[] = ['Wert' => VW_DOORSTATE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1];
-		$associations[] = ['Wert' => VW_DOORSTATE_UNSUPPORTED, 'Name' => $this->Translate('unsupported'), 'Farbe' => -1];
-		$associations[] = ['Wert' => VW_DOORSTATE_OPENED, 'Name' => $this->Translate('opened'), 'Farbe' => -1];
-		$associations[] = ['Wert' => VW_DOORSTATE_CLOSED, 'Name' => $this->Translate('closed'), 'Farbe' => -1];
-		$associations[] = ['Wert' => VW_DOORSTATE_LOCKED, 'Name' => $this->Translate('locked'), 'Farbe' => -1];
-		$this->CreateVarProfile('VWCarNet.DoorState', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
+        $associations = [];
+        $associations[] = ['Wert' => VW_DOORSTATE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1];
+        $associations[] = ['Wert' => VW_DOORSTATE_UNSUPPORTED, 'Name' => $this->Translate('unsupported'), 'Farbe' => -1];
+        $associations[] = ['Wert' => VW_DOORSTATE_OPENED, 'Name' => $this->Translate('opened'), 'Farbe' => -1];
+        $associations[] = ['Wert' => VW_DOORSTATE_CLOSED, 'Name' => $this->Translate('closed'), 'Farbe' => -1];
+        $associations[] = ['Wert' => VW_DOORSTATE_LOCKED, 'Name' => $this->Translate('locked'), 'Farbe' => -1];
+        $this->CreateVarProfile('VWCarNet.DoorState', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
 
-		$associations = [];
-		$associations[] = ['Wert' => VW_WINDOWSTATE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1];
-		$associations[] = ['Wert' => VW_WINDOWSTATE_UNSUPPORTED, 'Name' => $this->Translate('unsupported'), 'Farbe' => -1];
-		$associations[] = ['Wert' => VW_WINDOWSTATE_OPENED, 'Name' => $this->Translate('opened'), 'Farbe' => -1];
-		$associations[] = ['Wert' => VW_WINDOWSTATE_CLOSED, 'Name' => $this->Translate('closed'), 'Farbe' => -1];
-		$this->CreateVarProfile('VWCarNet.WindowState', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
+        $associations = [];
+        $associations[] = ['Wert' => VW_WINDOWSTATE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1];
+        $associations[] = ['Wert' => VW_WINDOWSTATE_UNSUPPORTED, 'Name' => $this->Translate('unsupported'), 'Farbe' => -1];
+        $associations[] = ['Wert' => VW_WINDOWSTATE_OPENED, 'Name' => $this->Translate('opened'), 'Farbe' => -1];
+        $associations[] = ['Wert' => VW_WINDOWSTATE_CLOSED, 'Name' => $this->Translate('closed'), 'Farbe' => -1];
+        $this->CreateVarProfile('VWCarNet.WindowState', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
     }
 
     public function ApplyChanges()
@@ -761,13 +759,13 @@ class VWCarNet extends IPSModule
     {
         switch ($serviceMessage) {
             case 0:
-				$retval = VW_SERVICEMESSAGE_NONE;
+                $retval = VW_SERVICEMESSAGE_NONE;
                 break;
             case 1:
-				$retval = VW_SERVICEMESSAGE_WARNING;
+                $retval = VW_SERVICEMESSAGE_WARNING;
                 break;
             default:
-				$retval = VW_SERVICEMESSAGE_UNKNOWN;
+                $retval = VW_SERVICEMESSAGE_UNKNOWN;
                 $e = 'unknown value ' . $serviceMessage;
                 $this->SendDebug(__FUNCTION__, $e, 0);
                 $this->LogMessage(__FUNCTION__ . ': ' . $e, KL_WARNING);
@@ -780,10 +778,10 @@ class VWCarNet extends IPSModule
     {
         switch ($parkingBrake) {
             case 0:
-				$retval = VW_PARKINGBREAK_RELEASED;
+                $retval = VW_PARKINGBREAK_RELEASED;
                 break;
             case 1:
-				$retval = VW_PARKINGBREAK_TIGHTENED;
+                $retval = VW_PARKINGBREAK_TIGHTENED;
                 break;
             default:
                 $retval = VW_PARKINGBREAK_UNKNOWN;
@@ -811,7 +809,7 @@ class VWCarNet extends IPSModule
                 $retval = VW_PARKINGLIGHT_BOTH;
                 break;
             default:
-				$retval = VW_PARKINGLIGHT_UNKNOWN;
+                $retval = VW_PARKINGLIGHT_UNKNOWN;
                 $e = 'unknown value ' . $parkingLight;
                 $this->SendDebug(__FUNCTION__, $e, 0);
                 $this->LogMessage(__FUNCTION__ . ': ' . $e, KL_WARNING);
@@ -822,22 +820,22 @@ class VWCarNet extends IPSModule
 
     private function decode_doorState($doorLockState, $doorCloseState)
     {
-		$retval = VW_DOORSTATE_UNKNOWN;
+        $retval = VW_DOORSTATE_UNKNOWN;
 
-		if ($doorLockState == 0 || $doorCloseState == 0) {
-			$retval = VW_DOORSTATE_UNSUPPORTED;
-		} else if ($doorLockState == 2) {
-			$retval = VW_DOORSTATE_LOCKED;
-		} else if (doorCloseState == 3) {
-			$retval = VW_DOORSTATE_CLOSED;
-		} else if (doorCloseState == 2) {
-			$retval = VW_DOORSTATE_OPENED;
-		}
+        if ($doorLockState == 0 || $doorCloseState == 0) {
+            $retval = VW_DOORSTATE_UNSUPPORTED;
+        } elseif ($doorLockState == 2) {
+            $retval = VW_DOORSTATE_LOCKED;
+        } elseif (doorCloseState == 3) {
+            $retval = VW_DOORSTATE_CLOSED;
+        } elseif (doorCloseState == 2) {
+            $retval = VW_DOORSTATE_OPENED;
+        }
 
-		if ($retval == VW_DOORSTATE_UNKNOWN) {
-			$e = 'unknown value ' . $doorLockState . '/' . $doorCloseState;
-			$this->SendDebug(__FUNCTION__, $e, 0);
-			$this->LogMessage(__FUNCTION__ . ': ' . $e, KL_WARNING);
+        if ($retval == VW_DOORSTATE_UNKNOWN) {
+            $e = 'unknown value ' . $doorLockState . '/' . $doorCloseState;
+            $this->SendDebug(__FUNCTION__, $e, 0);
+            $this->LogMessage(__FUNCTION__ . ': ' . $e, KL_WARNING);
         }
         return $retval;
     }
@@ -856,7 +854,7 @@ class VWCarNet extends IPSModule
                 break;
             default:
                 $retval = VW_WINDOWSTATE_UNKNOWN;
-				$e = 'unknown value ' . $windowState;
+                $e = 'unknown value ' . $windowState;
                 $this->SendDebug(__FUNCTION__, $e, 0);
                 $this->LogMessage(__FUNCTION__ . ': ' . $e, KL_WARNING);
                 break;
