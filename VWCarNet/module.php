@@ -75,7 +75,7 @@ class VWCarNet extends IPSModule
     {
         parent::Create();
 
-		$this->RegisterPropertyBoolean('module_disable', false);
+        $this->RegisterPropertyBoolean('module_disable', false);
 
         $this->RegisterPropertyString('username', '');
         $this->RegisterPropertyString('password', '');
@@ -193,12 +193,12 @@ class VWCarNet extends IPSModule
         $username = $this->ReadPropertyString('username');
         $password = $this->ReadPropertyString('password');
 
-		$module_disable = $this->ReadPropertyBoolean('module_disable');
-		if ($module_disable) {
-		    $this->SetTimerInterval('UpdateData', 0);
-			$this->SetStatus(IS_INACTIVE);
-			return;
-		}
+        $module_disable = $this->ReadPropertyBoolean('module_disable');
+        if ($module_disable) {
+            $this->SetTimerInterval('UpdateData', 0);
+            $this->SetStatus(IS_INACTIVE);
+            return;
+        }
 
         if ($username != '' && $password != '') {
             $this->SetStatus(IS_ACTIVE);
@@ -217,7 +217,7 @@ class VWCarNet extends IPSModule
         $model_opts[] = ['label' => 'Electric', 'value' => VW_MODEL_ELECTRIC];
 
         $formElements = [];
-		$formElements[] = ['type' => 'CheckBox', 'name' => 'module_disable', 'caption' => 'Instance is disabled'];
+        $formElements[] = ['type' => 'CheckBox', 'name' => 'module_disable', 'caption' => 'Instance is disabled'];
         $formElements[] = ['type' => 'Label', 'label' => 'Volkswagen Car-Net Account'];
         $formElements[] = ['type' => 'ValidationTextBox', 'name' => 'username', 'caption' => 'User-ID (email)'];
         $formElements[] = ['type' => 'ValidationTextBox', 'name' => 'password', 'caption' => 'Password'];
@@ -266,11 +266,11 @@ class VWCarNet extends IPSModule
 
     public function UpdateData()
     {
-		$inst = IPS_GetInstance($this->InstanceID);
-		if ($inst['InstanceStatus'] == IS_INACTIVE) {
-			$this->SendDebug(__FUNCTION__, 'instance is inactive, skip', 0);
-			return;
-		}
+        $inst = IPS_GetInstance($this->InstanceID);
+        if ($inst['InstanceStatus'] == IS_INACTIVE) {
+            $this->SendDebug(__FUNCTION__, 'instance is inactive, skip', 0);
+            return;
+        }
 
         $model = $this->ReadPropertyInteger('model');
 
@@ -288,12 +288,12 @@ class VWCarNet extends IPSModule
 
     public function TestAccess()
     {
-		$inst = IPS_GetInstance($this->InstanceID);
-		if ($inst['InstanceStatus'] == IS_INACTIVE) {
-			$this->SendDebug(__FUNCTION__, 'instance is inactive, skip', 0);
-			echo $this->translate('Instance is inactive') . PHP_EOL;
-			return;
-		}
+        $inst = IPS_GetInstance($this->InstanceID);
+        if ($inst['InstanceStatus'] == IS_INACTIVE) {
+            $this->SendDebug(__FUNCTION__, 'instance is inactive, skip', 0);
+            echo $this->translate('Instance is inactive') . PHP_EOL;
+            return;
+        }
 
         $vin = $this->ReadPropertyString('vin');
 
