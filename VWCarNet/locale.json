@@ -1,6 +1,8 @@
 {
 	"translations": {
 		"de": {
+			"Instance is disabled": "Instanz ist deaktiviert",
+
 			"Volkswagen Car-Net Account": "Volkswagen Car-Net Konto",
 			"User-ID (email)": "Benutzer (EMail)",
 			"Password": "Passwort",

@@ -49,6 +49,8 @@ Anschließend erscheint ein Eintrag für das Modul in der Liste der Instanz _Mod
 
 | Eigenschaft               | Typ      | Standardwert | Beschreibung |
 | :-----------------------: | :-----:  | :----------: | :----------: |
+| Instanz ist deaktiviert   | boolean  | false        | Instanz temporär deaktivieren |
+|                           |          |              | |
 | Benutzer                  | string   |              | Car-Net-Konto: Benutzerkennung |
 | Passwort                  | string   |              | Car-Net-Konto: Passwort |
 | FIN                       | string   |              | Fahrzeug-Identifikations-Nummer |
@@ -77,6 +79,10 @@ GUIDs
   - VWCatNet: `{D0B19818-B164-403D-B67C-E00C42673C79}`
 
 ## 7. Versions-Historie
+
+- 1.1 @ 21.03.2019 20:22<br>
+  - Schalter, um ein Modul (temporär) zu deaktivieren
+  - Konfigurations-Element IntervalBox -> NumberSpinner
 
 - 1.0 @ 04.11.2018 10:49<br>
   Initiale Version

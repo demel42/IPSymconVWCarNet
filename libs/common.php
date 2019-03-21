@@ -125,21 +125,6 @@ trait VWCarNetCommon
         return 'text/plain';
     }
 
-    protected function LogMessage($Message, $Severity)
-    {
-        switch ($Severity) {
-            case KL_NOTIFY:
-            case KL_WARNING:
-            case KL_ERROR:
-            case KL_DEBUG:
-                parent::LogMessage($Message, $Severity);
-                break;
-            default:
-                echo __CLASS__ . '::' . __FUNCTION__ . ': unknown severity ' . $Severity;
-                break;
-        }
-    }
-
     private function GetArrayElem($data, $var, $dflt)
     {
         $ret = $data;
