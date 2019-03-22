@@ -83,6 +83,7 @@ GUIDs
 - 1.1 @ 21.03.2019 20:22<br>
   - Schalter, um ein Modul (temporär) zu deaktivieren
   - Konfigurations-Element IntervalBox -> NumberSpinner
+  - curl_errno() abfragen
 
 - 1.0 @ 04.11.2018 10:49<br>
   Initiale Version
