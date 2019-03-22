@@ -463,14 +463,14 @@ class VWCarNet extends IPSModule
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         $cdata = curl_exec($ch);
-		$cerrno = curl_errno($ch);
-		$cerror = $cerrno ? curl_error($ch) : '';
+        $cerrno = curl_errno($ch);
+        $cerror = $cerrno ? curl_error($ch) : '';
         $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $redirect_url = curl_getinfo($ch, CURLINFO_REDIRECT_URL);
         curl_close($ch);
 
         $duration = round(microtime(true) - $time_start, 2);
-		$this->SendDebug(__FUNCTION__, ' => errno=' . $cerrno . ', httpcode=' . $httpcode . ', duration=' . $duration . 's', 0);
+        $this->SendDebug(__FUNCTION__, ' => errno=' . $cerrno . ', httpcode=' . $httpcode . ', duration=' . $duration . 's', 0);
         $this->SendDebug(__FUNCTION__, ' => cdata=' . $cdata, 0);
 
         $statuscode = 0;
@@ -485,9 +485,9 @@ class VWCarNet extends IPSModule
             }
         }
 
-		if ($cerrno) {
-			$statuscode = IS_SERVERERROR;
-			$err = 'got curl-errno ' . $cerrno . ' (' . $cerror . ')';
+        if ($cerrno) {
+            $statuscode = IS_SERVERERROR;
+            $err = 'got curl-errno ' . $cerrno . ' (' . $cerror . ')';
         } elseif ($httpcode == 200) {
             $data = $cdata;
         } elseif ($httpcode == 302) {
