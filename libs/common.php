@@ -25,7 +25,7 @@ trait VWCarNetCommon
             return;
         }
 
-        $ret = parent::SetValue($Ident, $Value);
+        @$ret = parent::SetValue($Ident, $Value);
         if ($ret == false) {
             $this->SendDebug(__FUNCTION__, 'mismatch of value "' . $Value . '" for variable ' . $Ident, 0);
         }
@@ -40,7 +40,6 @@ trait VWCarNetCommon
         }
 
         $ret = parent::GetValue($Ident);
-
         return $ret;
     }
 
@@ -56,7 +55,7 @@ trait VWCarNetCommon
             $IsChanged = true;
         }
 
-        $ret = parent::SetValue($Ident, $Value);
+        @$ret = parent::SetValue($Ident, $Value);
         if ($ret == false) {
             $this->SendDebug(__FUNCTION__, 'mismatch of value "' . $Value . '" for variable ' . $Ident, 0);
             return;
