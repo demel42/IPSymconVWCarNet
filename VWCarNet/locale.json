@@ -34,14 +34,17 @@
 			"Range": "Reichweite",
 			"Rear left door": "Tür hinten links",
 			"Rear right door": "Tür hinten rechts",
+			"Remaining charging time": "verbleibende Ladezeit",
 			"Service in": "Service in",
 			"Service message": "Servicemeldung",
+			"State of Charge": "aktueller Ladezustand",
 			"Sunroof": "Schiebedach",
 			"Temperature outside": "Aussentemperatur",
 			"Timestamp of last position": "Zeitpunkt der letzten Positionsmeldung",
 			"Timestamp of parking": "Zeitpunkt des Parkens",
 
 			"days": "Tage",
+			"mins": "Minuten",
 
 			"left side on": "linksseitig an",
 			"right side on": "rechtsseitig an",

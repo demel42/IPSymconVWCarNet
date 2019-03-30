@@ -89,6 +89,7 @@ class VWCarNet extends IPSModule
 
         $this->CreateVarProfile('VWCarNet.Mileage', VARIABLETYPE_INTEGER, ' km', 0, 0, 0, 0, 'Distance');
         $this->CreateVarProfile('VWCarNet.Days', VARIABLETYPE_INTEGER, ' ' . $this->Translate('days'), 0, 0, 0, 0, '');
+        $this->CreateVarProfile('VWCarNet.Mins', VARIABLETYPE_INTEGER, ' ' . $this->Translate('mins'), 0, 0, 0, 0, '');
 
         $this->CreateVarProfile('VWCarNet.Location', VARIABLETYPE_FLOAT, ' °', 0, 0, 0, 5, '');
         $this->CreateVarProfile('VWCarNet.Temperature', VARIABLETYPE_FLOAT, ' °C', 0, 0, 0, 0, '');
@@ -142,6 +143,8 @@ class VWCarNet extends IPSModule
         $this->MaintainVariable('Range', $this->Translate('Range'), VARIABLETYPE_INTEGER, 'VWCarNet.Mileage', $vpos++, true);
 
         $this->MaintainVariable('BatteryLevel', $this->Translate('Battery level'), VARIABLETYPE_FLOAT, 'VWCarNet.BatteryLevel', $vpos++, $with_electric);
+        $this->MaintainVariable('StateOfCharge', $this->Translate('State of charge'), VARIABLETYPE_FLOAT, 'VWCarNet.BatteryLevel', $vpos++, $with_electric);
+        $this->MaintainVariable('RemainingChargingTime', $this->Translate('Remaining charging time'), VARIABLETYPE_INTEGER, 'VWCarNet.Mileage', $vpos++, true);
 
         $vpos = 50;
         $this->MaintainVariable('DriverDoor', $this->Translate('Driver door'), VARIABLETYPE_INTEGER, 'VWCarNet.DoorState', $vpos++, true);
@@ -766,8 +769,10 @@ class VWCarNet extends IPSModule
 
             $stateOfCharge = $this->GetArrayElem($jdata, 'charger.status.batteryStatusData.stateOfCharge.content', '');
             $this->SendDebug(__FUNCTION__, utf8_decode('stateOfCharge=' . $stateOfCharge), 0);
-            $remainingChargingTime = $this->GetArrayElem($jdata, 'charger.status.batteryStatusData.remainingChargingTime.content', '');
+            $this->SetValue('StateOfCharge', $stateOfCharge);
+            $remainingChargingTime = $this->GetArrayElem($jdata, 'charger.status.batteryStatusData.remainingChargingTime.content', 0);
             $this->SendDebug(__FUNCTION__, utf8_decode('remainingChargingTime=' . $remainingChargingTime), 0);
+            $this->SetValue('RemainingChargingTime', $remainingChargingTime);
             $remainingChargingTimeTargetSOC = $this->GetArrayElem($jdata, 'charger.status.batteryStatusData.remainingChargingTimeTargetSOC.content', '');
             $this->SendDebug(__FUNCTION__, utf8_decode('remainingChargingTimeTargetSOC=' . $remainingChargingTimeTargetSOC), 0);
 
@@ -776,9 +781,9 @@ class VWCarNet extends IPSModule
             $ledState = $this->GetArrayElem($jdata, 'charger.status.ledStatusData.ledState.content', '');
             $this->SendDebug(__FUNCTION__, utf8_decode('ledState=' . $ledState), 0);
 
-            $plugState = $this->GetArrayElem($jdata, 'charger.status.ledStatusData.plugState.content', '');
+            $plugState = $this->GetArrayElem($jdata, 'charger.status.plugStatusData.plugState.content', '');
             $this->SendDebug(__FUNCTION__, utf8_decode('plugState=' . $plugState), 0);
-            $lockState = $this->GetArrayElem($jdata, 'charger.status.ledStatusData.lockState.content', '');
+            $lockState = $this->GetArrayElem($jdata, 'charger.status.plugStatusData.lockState.content', '');
             $this->SendDebug(__FUNCTION__, utf8_decode('lockState=' . $lockState), 0);
         }
     }
