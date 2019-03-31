@@ -81,7 +81,7 @@ GUIDs
 ## 7. Versions-Historie
 
 - 1.3 @ 30.03.2019 17:15<br>
-  - Übernahme von _stateOfCharge_ und _remainingChargingTime_
+  - Übernahme von _chargingState_, _stateOfCharge_ und _remainingChargingTime_
   - Debug-Korrektur
 
 - 1.2 @ 29.03.2019 16:19<br>
