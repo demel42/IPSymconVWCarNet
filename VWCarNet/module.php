@@ -98,50 +98,50 @@ class VWCarNet extends IPSModule
         $this->CreateVarProfile('VWCarNet.BatteryLevel', VARIABLETYPE_FLOAT, ' %', 0, 0, 0, 0, '');
 
         $associations = [
-				['Wert' => VW_PARKINGLIGHT_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1],
-				['Wert' => VW_PARKINGLIGHT_OFF, 'Name' => $this->Translate('off'), 'Farbe' => -1],
-				['Wert' => VW_PARKINGLIGHT_LEFT, 'Name' => $this->Translate('left side on'), 'Farbe' => -1],
-				['Wert' => VW_PARKINGLIGHT_RIGHT, 'Name' => $this->Translate('right side on'), 'Farbe' => -1],
-				['Wert' => VW_PARKINGLIGHT_BOTH, 'Name' => $this->Translate('both side on'), 'Farbe' => -1],
-			];
-		$this->CreateVarProfile('VWCarNet.ParkingLight', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
+                ['Wert' => VW_PARKINGLIGHT_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1],
+                ['Wert' => VW_PARKINGLIGHT_OFF, 'Name' => $this->Translate('off'), 'Farbe' => -1],
+                ['Wert' => VW_PARKINGLIGHT_LEFT, 'Name' => $this->Translate('left side on'), 'Farbe' => -1],
+                ['Wert' => VW_PARKINGLIGHT_RIGHT, 'Name' => $this->Translate('right side on'), 'Farbe' => -1],
+                ['Wert' => VW_PARKINGLIGHT_BOTH, 'Name' => $this->Translate('both side on'), 'Farbe' => -1],
+            ];
+        $this->CreateVarProfile('VWCarNet.ParkingLight', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
 
         $associations = [
-				$associations[] = ['Wert' => VW_PARKINGBREAK_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1],
-				$associations[] = ['Wert' => VW_PARKINGBREAK_RELEASED, 'Name' => $this->Translate('released'), 'Farbe' => -1],
-				$associations[] = ['Wert' => VW_PARKINGBREAK_TIGHTENED, 'Name' => $this->Translate('tightened'), 'Farbe' => -1],
-			];
+                $associations[] = ['Wert' => VW_PARKINGBREAK_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1],
+                $associations[] = ['Wert' => VW_PARKINGBREAK_RELEASED, 'Name' => $this->Translate('released'), 'Farbe' => -1],
+                $associations[] = ['Wert' => VW_PARKINGBREAK_TIGHTENED, 'Name' => $this->Translate('tightened'), 'Farbe' => -1],
+            ];
         $this->CreateVarProfile('VWCarNet.ParkingBreak', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
 
         $associations = [
-        		['Wert' => VW_SERVICEMESSAGE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1],
-        		['Wert' => VW_SERVICEMESSAGE_NONE, 'Name' => $this->Translate('no message'), 'Farbe' => -1],
-        		['Wert' => VW_SERVICEMESSAGE_WARNING, 'Name' => $this->Translate('warning'), 'Farbe' => -1],
-			];
+                ['Wert' => VW_SERVICEMESSAGE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1],
+                ['Wert' => VW_SERVICEMESSAGE_NONE, 'Name' => $this->Translate('no message'), 'Farbe' => -1],
+                ['Wert' => VW_SERVICEMESSAGE_WARNING, 'Name' => $this->Translate('warning'), 'Farbe' => -1],
+            ];
         $this->CreateVarProfile('VWCarNet.ServiceMessage', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
 
         $associations = [
-        		['Wert' => VW_DOORSTATE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1],
-        		['Wert' => VW_DOORSTATE_UNSUPPORTED, 'Name' => $this->Translate('unsupported'), 'Farbe' => -1],
-        		['Wert' => VW_DOORSTATE_OPENED, 'Name' => $this->Translate('opened'), 'Farbe' => -1],
-        		['Wert' => VW_DOORSTATE_CLOSED, 'Name' => $this->Translate('closed'), 'Farbe' => -1],
-        		['Wert' => VW_DOORSTATE_LOCKED, 'Name' => $this->Translate('locked'), 'Farbe' => -1],
-			];
+                ['Wert' => VW_DOORSTATE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1],
+                ['Wert' => VW_DOORSTATE_UNSUPPORTED, 'Name' => $this->Translate('unsupported'), 'Farbe' => -1],
+                ['Wert' => VW_DOORSTATE_OPENED, 'Name' => $this->Translate('opened'), 'Farbe' => -1],
+                ['Wert' => VW_DOORSTATE_CLOSED, 'Name' => $this->Translate('closed'), 'Farbe' => -1],
+                ['Wert' => VW_DOORSTATE_LOCKED, 'Name' => $this->Translate('locked'), 'Farbe' => -1],
+            ];
         $this->CreateVarProfile('VWCarNet.DoorState', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
 
         $associations = [
-        		['Wert' => VW_WINDOWSTATE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1],
-        		['Wert' => VW_WINDOWSTATE_UNSUPPORTED, 'Name' => $this->Translate('unsupported'), 'Farbe' => -1],
-        		['Wert' => VW_WINDOWSTATE_OPENED, 'Name' => $this->Translate('opened'), 'Farbe' => -1],
-        		['Wert' => VW_WINDOWSTATE_CLOSED, 'Name' => $this->Translate('closed'), 'Farbe' => -1],
-		];
+                ['Wert' => VW_WINDOWSTATE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1],
+                ['Wert' => VW_WINDOWSTATE_UNSUPPORTED, 'Name' => $this->Translate('unsupported'), 'Farbe' => -1],
+                ['Wert' => VW_WINDOWSTATE_OPENED, 'Name' => $this->Translate('opened'), 'Farbe' => -1],
+                ['Wert' => VW_WINDOWSTATE_CLOSED, 'Name' => $this->Translate('closed'), 'Farbe' => -1],
+        ];
         $this->CreateVarProfile('VWCarNet.WindowState', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
 
         $associations = [
-        		['Wert' => VW_CHARGINGSTATE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1],
-        		['Wert' => VW_CHARGINGSTATE_OFF, 'Name' => $this->Translate('off'), 'Farbe' => -1],
-        		['Wert' => VW_CHARGINGSTATE_CHARGING, 'Name' => $this->Translate('charging'), 'Farbe' => -1],
-		];
+                ['Wert' => VW_CHARGINGSTATE_UNKNOWN, 'Name' => $this->Translate('unknown state'), 'Farbe' => -1],
+                ['Wert' => VW_CHARGINGSTATE_OFF, 'Name' => $this->Translate('off'), 'Farbe' => -1],
+                ['Wert' => VW_CHARGINGSTATE_CHARGING, 'Name' => $this->Translate('charging'), 'Farbe' => -1],
+        ];
         $this->CreateVarProfile('VWCarNet.ChargingState', VARIABLETYPE_INTEGER, '', 0, 0, 0, 0, '', $associations);
     }
 
@@ -790,7 +790,7 @@ class VWCarNet extends IPSModule
             $this->SetValue('StateOfCharge', $stateOfCharge);
 
             $_remainingChargingTime = $this->GetArrayElem($jdata, 'charger.status.batteryStatusData.remainingChargingTime.content', 0);
-			$remainingChargingTime = $chargingState == VW_CHARGINGTATE_CHARGING ? $_remainingChargingTime : 0;
+            $remainingChargingTime = $chargingState == VW_CHARGINGTATE_CHARGING ? $_remainingChargingTime : 0;
             $this->SendDebug(__FUNCTION__, utf8_decode('remainingChargingTime=' . $_remainingChargingTime . ' => ' . $remainingChargingTime), 0);
             $this->SetValue('RemainingChargingTime', $remainingChargingTime);
 
