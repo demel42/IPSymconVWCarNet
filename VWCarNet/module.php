@@ -788,7 +788,7 @@ class VWCarNet extends IPSModule
             $this->SetValue('StateOfCharge', $stateOfCharge);
 
             $_remainingChargingTime = $this->GetArrayElem($jdata, 'charger.status.batteryStatusData.remainingChargingTime.content', 0);
-            $remainingChargingTime = $chargingState == VW_CHARGINGTATE_CHARGING ? $_remainingChargingTime : 0;
+            $remainingChargingTime = $chargingState == VW_CHARGINGSTATE_CHARGING ? $_remainingChargingTime : 0;
             $this->SendDebug(__FUNCTION__, utf8_decode('remainingChargingTime=' . $_remainingChargingTime . ' => ' . $remainingChargingTime), 0);
             $this->SetValue('RemainingChargingTime', $remainingChargingTime);
 
@@ -918,13 +918,13 @@ class VWCarNet extends IPSModule
     {
         switch ($chargingState) {
             case 'off':
-                $retval = VW_CHARGINGTATE_OFF;
+                $retval = VW_CHARGINGSTATE_OFF;
                 break;
             case 'charging':
-                $retval = VW_CHARGINGTATE_CHARGING;
+                $retval = VW_CHARGINGSTATE_CHARGING;
                 break;
             default:
-                $retval = VW_CHARGINGTATE_UNKNOWN;
+                $retval = VW_CHARGINGSTATE_UNKNOWN;
                 $e = 'unknown value ' . $chargingState;
                 $this->SendDebug(__FUNCTION__, $e, 0);
                 $this->LogMessage(__FUNCTION__ . ': ' . $e, KL_WARNING);
