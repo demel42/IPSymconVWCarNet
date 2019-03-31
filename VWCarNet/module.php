@@ -159,7 +159,7 @@ class VWCarNet extends IPSModule
         $this->MaintainVariable('BatteryLevel', $this->Translate('Battery level'), VARIABLETYPE_FLOAT, 'VWCarNet.BatteryLevel', $vpos++, $with_electric);
         $this->MaintainVariable('ChargingState', $this->Translate('Charging state'), VARIABLETYPE_INTEGER, 'VWCarNet.ChargingState', $vpos++, $with_electric);
         $this->MaintainVariable('StateOfCharge', $this->Translate('State of charge'), VARIABLETYPE_FLOAT, 'VWCarNet.BatteryLevel', $vpos++, $with_electric);
-        $this->MaintainVariable('RemainingChargingTime', $this->Translate('Remaining charging time'), VARIABLETYPE_INTEGER, 'VWCarNet.Mileage', $vpos++, $with_electric);
+        $this->MaintainVariable('RemainingChargingTime', $this->Translate('Remaining charging time'), VARIABLETYPE_INTEGER, 'VWCarNet.Mins', $vpos++, $with_electric);
 
         $vpos = 50;
         $this->MaintainVariable('DriverDoor', $this->Translate('Driver door'), VARIABLETYPE_INTEGER, 'VWCarNet.DoorState', $vpos++, true);
@@ -194,8 +194,6 @@ class VWCarNet extends IPSModule
             chargingReason
             externalPowerSupplyState
             energyFlow
-            chargingState
-            remainingChargingTime
         */
 
         $vpos = 120;
