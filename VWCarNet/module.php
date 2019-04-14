@@ -878,9 +878,9 @@ class VWCarNet extends IPSModule
             $retval = VW_DOORSTATE_UNSUPPORTED;
         } elseif ($doorLockState == 2) {
             $retval = VW_DOORSTATE_LOCKED;
-        } elseif (doorCloseState == 3) {
+        } elseif ($doorCloseState == 3) {
             $retval = VW_DOORSTATE_CLOSED;
-        } elseif (doorCloseState == 2) {
+        } elseif ($doorCloseState == 2) {
             $retval = VW_DOORSTATE_OPENED;
         }
 
