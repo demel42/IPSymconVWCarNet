@@ -290,7 +290,7 @@ class VWCarNet extends IPSModule
 
         $model = $this->ReadPropertyInteger('model');
 
-        $this->getStatus();
+        $this->getState();
         $this->getPosition();
 
         $this->getClimater();
@@ -527,7 +527,7 @@ class VWCarNet extends IPSModule
         return $statuscode;
     }
 
-    private function getStatus()
+    private function getState()
     {
         $vin = $this->ReadPropertyString('vin');
         $func = '/bs/vsr/v1/VW/DE/vehicles/' . $vin . '/status';
