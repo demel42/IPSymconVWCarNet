@@ -1,7 +1,7 @@
 # IPSymconVWCarNet
 
 [![IPS-Version](https://img.shields.io/badge/Symcon_Version-5.0+-red.svg)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
-![Module-Version](https://img.shields.io/badge/Modul_Version-1.5-blue.svg)
+![Module-Version](https://img.shields.io/badge/Modul_Version-1.6-blue.svg)
 ![Code](https://img.shields.io/badge/Code-PHP-blue.svg)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![StyleCI](https://github.styleci.io/repos/126683101/shield?branch=master)](https://github.styleci.io/repos/162714119)
@@ -47,28 +47,41 @@ Anschließend erscheint ein Eintrag für das Modul in der Liste der Instanz _Mod
 
 #### Variablen
 
-| Eigenschaft               | Typ      | Standardwert | Beschreibung |
-| :-----------------------: | :-----:  | :----------: | :----------: |
-| Instanz ist deaktiviert   | boolean  | false        | Instanz temporär deaktivieren |
-|                           |          |              | |
-| Benutzer                  | string   |              | Car-Net-Konto: Benutzerkennung |
-| Passwort                  | string   |              | Car-Net-Konto: Passwort |
-| FIN                       | string   |              | Fahrzeug-Identifikations-Nummer |
-|                           |          |              |              |
-| Aktualisiere Daten ...    | integer  | 60           | Aktualisierungsintervall, Angabe in Minuten |
+| Eigenschaft             | Typ     | Standardwert | Beschreibung |
+| :---------------------- | :------ | :----------- | :----------- |
+| Instanz ist deaktiviert | boolean | false        | Instanz temporär deaktivieren |
+|                         |         |              | |
+| Benutzer                | string  |              | Car-Net-Konto: Benutzerkennung |
+| Passwort                | string  |              | Car-Net-Konto: Passwort |
+| FIN                     | string  |              | Fahrzeug-Identifikations-Nummer |
+|                         |         |              | |
+| Aktualisiere Daten ...  | integer | 60           | Aktualisierungsintervall, Angabe in Minuten |
 
 #### Schaltflächen
 
-| Bezeichnung                  | Beschreibung |
-| :--------------------------: | :----------: |
-| Zugang prüfen                | Prüft, ob die Angaben korrekt sind |
-| Aktualisiere Daten           | führt eine sofortige Aktualisierung durch |
+| Bezeichnung        | Beschreibung |
+| :----------------- | :----------- |
+| Zugang prüfen      | Prüft, ob die Angaben korrekt sind |
+| Aktualisiere Daten | führt eine sofortige Aktualisierung durch |
 
 ### Variablenprofile
 
-* Boolean<br>
 
 * Integer<br>
+VWCarNet.ChargingState,
+VWCarNet.Days,
+VWCarNet.DoorState,
+VWCarNet.Mileage,
+VWCarNet.Mins,
+VWCarNet.ParkingBreak,
+VWCarNet.ParkingLight,
+VWCarNet.ServiceMessage,
+VWCarNet.WindowState
+
+* Float<br>
+VWCarNet.BatteryLevel,
+VWCarNet.Location,
+VWCarNet.Temperature
 
 ## 6. Anhang
 
@@ -79,6 +92,9 @@ GUIDs
   - VWCatNet: `{D0B19818-B164-403D-B67C-E00C42673C79}`
 
 ## 7. Versions-Historie
+
+- 1.6 @ 28.04.2019 15:03<br>
+  - Dokumentation überarbeitet
 
 - 1.5 @ 16.04.2019 22:44<br>
   - 5.1-Kompatibilität: getStatus() -> getState()
