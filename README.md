@@ -20,6 +20,9 @@
 
 ## 1. Funktionsumfang
 
+Zugriff über die API auf das Volkswagen Car-Net. Die API iشt nicht dokumentiert, daher stehen ggfs nicht alle FUnktionen zur Verfügung.
+Eine Steuerung von Funktionen, z.B. der Klimaanlage ist mangels Informationen nicht implementiert.
+
 ## 2. Voraussetzungen
 
  - IP-Symcon ab Version 5
