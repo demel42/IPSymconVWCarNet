@@ -729,7 +729,7 @@ class VWCarNet extends IPSModule
 
             $_carTemp = $this->GetArrayElem($jdata, 'climater.status.temperatureStatusData.outdoorTemperature.content', '');
             if ($_carTemp != '') {
-                $carTemp = (floatval($_carTemp) / 100.0) - 273;
+                $carTemp = (floatval($_carTemp) / 10.0) - 273;
             } else {
                 $carTemp = 0;
             }
