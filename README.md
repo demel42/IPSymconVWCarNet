@@ -1,7 +1,7 @@
 # IPSymconVWCarNet
 
 [![IPS-Version](https://img.shields.io/badge/Symcon_Version-5.0+-red.svg)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
-![Module-Version](https://img.shields.io/badge/Modul_Version-1.6-blue.svg)
+![Module-Version](https://img.shields.io/badge/Modul_Version-1.7-blue.svg)
 ![Code](https://img.shields.io/badge/Code-PHP-blue.svg)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![StyleCI](https://github.styleci.io/repos/162714119/shield?branch=master)](https://github.styleci.io/repos/162714119)
@@ -95,6 +95,9 @@ GUIDs
   - VWCatNet: `{D0B19818-B164-403D-B67C-E00C42673C79}`
 
 ## 7. Versions-Historie
+
+- 1.7 @ 02.09.2019 17:54<br>
+  - Modul funktioniert nicht mehr, da die undokumentierte API sich geändert hat
 
 - 1.6 @ 28.04.2019 15:03<br>
   - Dokumentation überarbeitet
