@@ -6,6 +6,8 @@
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 [![StyleCI](https://github.styleci.io/repos/162714119/shield?branch=master)](https://github.styleci.io/repos/162714119)
 
+# Wichtiger Hinweis: aufgrund einer Änderung der undokumentierten API von VW ist das Modul nicht mehr funktionsfähig.
+
 ## Dokumentation
 
 **Inhaltsverzeichnis**
